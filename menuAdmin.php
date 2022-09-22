@@ -12,11 +12,6 @@
     <meta charset="utf-8">
     <title>Menu Bobaho</title>
 
-    <style>
-      button{
-        position: right;
-      }
-    </style>
 
   </head>
   <body align="">
