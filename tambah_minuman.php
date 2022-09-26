@@ -1,20 +1,17 @@
 <?php
-  session_start();
-  if(!isset($_SESSION['session_username'])){
-    header("location: login.php");
-  }
+date_default_timezone_set("Asia/Bangkok");
 ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Form Register</title>
+    <title>Isi Produk Minuman Baru</title>
   </head>
   <body>
-    <h1>Isi Daftar Minuman</h1>
+    <h1>Isi Data Minuman</h1>
     <form class="" action="create.php" method="post">
-      <label for="">Nama</label>
+      <label for="">Nama </label>
       <input type="text" name="nama" autocomplete = "off"> <br>
       <label for="">Umur</label>
       <input type="text" name="umur" autocomplete = "off"> <br>
@@ -25,8 +22,8 @@
       <input type="radio" name="jeniskelamin" value="Wanita">Wanita <br>
       <label for="">Agama</label>
       <select class="" name="agama">
-        <option value="Kristen">Kristen</option>
         <option value="Islam">Islam</option>
+        <option value="Kristen">Kristen</option>
         <option value="Buddha">Buddha</option>
         <option value="Hindu">Hindu</option>
         <option value="Konghucu">Konghucu</option>
