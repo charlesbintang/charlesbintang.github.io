@@ -10,7 +10,7 @@
         $query = "SELECT * FROM admin WHERE nama_admin = '$cookie_username'";
         $result = mysqli_query($koneksi,$query);
         $check = mysqli_fetch_array($result);
-        if ($check['password'] == $cookie_password){
+        if ($check['kata_sandi'] == $cookie_password){
             $_SESSION['session_username'] = $cookie_username;
             $_SESSION['session_password'] = $cookie_password;
         }                 
