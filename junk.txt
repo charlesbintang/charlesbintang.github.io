@@ -1,3 +1,10 @@
+yang akan dipakai: 
+<form>
+<button type="submit" name="submit" value = <?php echo date("d-m-Y"); ?> >Submit</button>
+      <input type="hidden" name="tanggal" value = <?php echo date("h:i:sa"); ?>>
+</form>
+
+
 
 <?php 
  

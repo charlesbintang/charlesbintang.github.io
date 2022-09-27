@@ -59,10 +59,10 @@
 
                 header("location: menuAdmin.php");
             } else {
-                // echo "<script>
-                //     alert('Username atau password salah');
-                //     window.location = 'login.php';
-                //     </script>";
+                echo "<script>
+                    alert('Username atau password salah');
+                    window.location = 'login.php';
+                    </script>";
             }
         }
     }

@@ -13,28 +13,28 @@
   </head>
   <body>
     <h1>Isi Daftar Minuman</h1>
-    <form class="" action="create.php" method="post">
-      <label for="">Nama</label>
-      <input type="text" name="nama" autocomplete = "off"> <br>
-      <label for="">Umur</label>
-      <input type="text" name="umur" autocomplete = "off"> <br>
-      <label for="">Email</label>
-      <input type="email" name="email" autocomplete="off"> <br>
-      <label for="">Jenis kelamin</label>
-      <input type="radio" name="jeniskelamin" value="Pria">Pria
-      <input type="radio" name="jeniskelamin" value="Wanita">Wanita <br>
-      <label for="">Agama</label>
-      <select class="" name="agama">
-        <option value="Kristen">Kristen</option>
-        <option value="Islam">Islam</option>
-        <option value="Buddha">Buddha</option>
-        <option value="Hindu">Hindu</option>
-        <option value="Konghucu">Konghucu</option>
+    <form action="create.php" method="post">
+      <label>Pilih Jenis Produk</label>
+      <select name="jenis_produk">
+        <option value="minuman">Minuman</option>
+        <option value="topping">Topping</option>
       </select> <br>
-      <label for="">Komentar</label> <br>
-      <textarea name="komentar" rows="8" cols="80"></textarea> <br>
-      <button type="submit" name="submit" value = <?php echo date("d-m-Y"); ?> >Submit</button>
-      <input type="hidden" name="tanggal" value = <?php echo date("h:i:sa"); ?>>
+      <label>Pilih Jenis Kategori</label>
+      <select name="kategori">
+        <option value="best seller">Best Seller</option>
+        <option value="chocolate">Chocolate</option>
+        <option value="yakult">Yakult</option>
+        <option value="mocktail">Mocktail</option>
+        <option value="fruit & smothies">Fruit & Smothies</option>
+        <option value="tea series">Tea Series</option>
+      </select> <br>
+      <label>Nama Produk</label>
+      <input type="text" name="nama_produk"> <br>
+      <label>Harga</label>
+      <input type="text" name="harga"> <br>
+      <label>Catatan :</label> <br>
+      <textarea name="catatan" rows="8" cols="80"></textarea> <br>
+      <button type="submit" name="submit">Submit</button>
     </form>
     <br>
     <a href="read.php">Lihat hasil data</a>
