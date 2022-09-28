@@ -17,7 +17,7 @@
     }
 
     if(isset($_SESSION['session_username'])){
-        header("location: menuAdmin.php");
+        header("location: index.php");
         exit();
     }
 
@@ -57,7 +57,7 @@
                     setcookie($cookie_name, $cookie_value, $cookie_time, "/");
                 }
 
-                header("location: menuAdmin.php");
+                header("location: index.php");
             } else {
                 echo "<script>
                     alert('Username atau password salah');

@@ -19,7 +19,7 @@
         <option value="minuman">Minuman</option>
         <option value="topping">Topping</option>
       </select> <br>
-      <label>Pilih Jenis Kategori</label>
+      <label>Pilih Kategori</label>
       <select name="kategori">
         <option value="best seller">Best Seller</option>
         <option value="chocolate">Chocolate</option>
@@ -35,6 +35,7 @@
       <label>Catatan :</label> <br>
       <textarea name="catatan" rows="8" cols="80"></textarea> <br>
       <button type="submit" name="submit">Submit</button>
-    </form>
+    </form> <br>
+    <a href="read.php">Lihat semua data produk</a>
   </body>
 </html>
