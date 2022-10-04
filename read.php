@@ -27,9 +27,9 @@ function query($data){
       <tr>
         <th>Nomor</th>
         <th>Jenis Produk</th>
-        <th>kategori</th>
+        <th>Kategori</th>
         <th>Nama Produk</th>
-        <th>harga </th>
+        <th>Harga </th>
         <th>Catatan</th>
         <th colspan = 2>Tindakan</th>
       </tr>
