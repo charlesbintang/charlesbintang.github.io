@@ -11,7 +11,7 @@ $namaproduk = $_POST['namaproduk'];
 $harga = $_POST['harga'];
 $catatan = $_POST['catatan'];
 
-$query = "INSERT INTO `menu_costumer` (`id_menu`, `jenisproduk`, `kategori`, `namaproduk`, `harga`, `catatan`) VALUES (NULL, '$jenisproduk', '$kategori', '$namaproduk', '$harga', '$catatan');";
+$query = "INSERT INTO `menu_costumer` (`id_menu`, `jenisproduk`, `kategori`, `namaproduk`, `harga`, `jumlahproduk`, `catatan`) VALUES (NULL, '$jenisproduk', '$kategori', '$namaproduk', '$harga', '$jumlahproduk','$catatan');";
 
 mysqli_query($koneksi, $query);
 

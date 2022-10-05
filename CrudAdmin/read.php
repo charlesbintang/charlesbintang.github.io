@@ -30,6 +30,7 @@ function query($data){
         <th>Kategori</th>
         <th>Nama Produk</th>
         <th>Harga </th>
+        <th>Jumlah Produk</th>
         <th>Catatan</th>
         <th colspan = 2>Tindakan</th>
       </tr>
@@ -52,6 +53,6 @@ function query($data){
     <br>
     <p>Total Data = <?php echo ($y - 1); ?></p>
     <br>
-    <a href="menuAdmin.php">Isi Data</a>
+    <a href="index.php">Isi Data</a>
   </body>
 </html>
