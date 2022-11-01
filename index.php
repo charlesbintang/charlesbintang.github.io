@@ -1,6 +1,3 @@
-<?php
-$koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,188 +60,36 @@ $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
 <h2 align="center" height="40%" class="textt">Best Seller</h2>
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <!-- looping php -->
+      <?php
+        $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
+        $sql = "SELECT * FROM menu_costumer";
+        $result = mysqli_query($koneksi ,$sql);
+        $counter = 1;
+        while($row = mysqli_fetch_array($result)) {
+      ?>
+      <div class="carousel-item <? if($counter <=1){ echo "active";} ?> ">
         <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/blacktea3.png" class="card-img-top" alt="..." width="100%">
+            <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
             <div class="card-body">
-              <!-- php -->
-              <?php 
-              $sql1 = "SELECT * FROM menu_costumer WHERE id_menu = '3'";
-              $result1 = mysqli_query($koneksi ,$sql1);
-              $produk1 = mysqli_fetch_array($result1);
-              ?>
-              
-              <h5 class="card-title"><?php echo $produk1["namaproduk"]; ?></h5>
-              <p class="card-text"><?php echo $produk1["harga"]; ?></p>
-              
-              
-              <button type="button" class="btn btn-light" onclick="decrement1()">-</button>
-              <span id="valueDisplay1" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment1()">+</button>
+              <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
+              <p class="card-text"><?php echo $row["harga"]; ?></p>
+              <button type="button" class="btn btn-light" onclick="decrement<?php echo $row['js_btn'];?>()">-</button>
+              <span id="valueDisplay<?php echo $row['js_btn'];?>" class="box">0</span>
+              <button type="button" class="btn btn-light" onclick="increment<?php echo $row['js_btn'];?>()">+</button>
               <script>
-                let count1 = 0;
-                const valueDisplay1 = document.getElementById("valueDisplay1");
-                increment1();
-                decrement1();
-                // if(count1 > 0){
-                //   <?php
-                //     $query = "INSERT INTO `membeli` (`id_costumer`,	`id_menu`,	`jumlah_pesanan`,	`total_pesanan`,	`catatan`) VALUES ('1', '3', '1', '1', 'jangan terlalu banyak gulaaaa');";
-                //     mysqli_query($koneksi, $query);
-                //   ?>
-                // }
+                let count<?php echo $row['js_btn'];?> = 0;
+                const valueDisplay<?php echo $row['js_btn'];?> = document.getElementById("valueDisplay<?php echo $row['js_btn'];?>");
+                increment<?php echo $row['js_btn'];?>();
+                decrement<?php echo $row['js_btn'];?>();
               </script>
             </div>
           </div>
           <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
+          <p class="fst-italic" align="center">Rasa:<br> <?php echo $row["catatan"]?></p>
       </div>
-      
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/bobaberryy.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Boba Berry</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement4()">-</button>
-              <span id="valueDisplay4" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment4()">+</button>
-              <script>
-                let count4= 0;
-                const valueDisplay4 = document.getElementById("valueDisplay4");
-                increment4();
-                decrement4();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/Jasminee.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Jasmine Milk</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement2()">-</button>
-              <span id="valueDisplay2" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment2()">+</button>
-              <script>
-                let count2= 0;
-                const valueDisplay2 = document.getElementById("valueDisplay2");
-                increment2();
-                decrement2();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/loveberry.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Love Berry</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement5()">-</button>
-              <span id="valueDisplay5" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment5()">+</button>
-              <script>
-                let count5= 0;
-                const valueDisplay5 = document.getElementById("valueDisplay5");
-                increment5();
-                decrement5();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/tarooo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Taro boba</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement6()">-</button>
-              <span id="valueDisplay6" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment6()">+</button>
-              <script>
-                let count6= 0;
-                const valueDisplay6 = document.getElementById("valueDisplay6");
-                increment6();
-                decrement6();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/premiumchocho.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h6 class="card-title">Premium Choco</h6>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement7()">-</button>
-              <span id="valueDisplay7" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment7()">+</button>
-              <script>
-                let count7= 0;
-                const valueDisplay7 = document.getElementById("valueDisplay7");
-                increment7();
-                decrement7();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/machamacha.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Macha boba</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement8()">-</button>
-              <span id="valueDisplay8" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment8()">+</button>
-              <script>
-                let count8= 0;
-                const valueDisplay8 = document.getElementById("valueDisplay8");
-                increment8();
-                decrement8();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
-
-      <div class="carousel-item">
-        <div class="card" style="width: 10rem;">
-            <img src="aset boba/1x/peachh.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Boba Peach</h5>
-              <p class="card-text">harga Boba</p>
-              <button type="button" class="btn btn-light" onclick="decrement3()">-</button>
-              <span id="valueDisplay3" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment3()">+</button>
-              <script>
-                let count3= 0;
-                const valueDisplay3 = document.getElementById("valueDisplay3");
-                increment3();
-                decrement3();
-              </script>
-            </div>
-          </div>
-          <br>
-          <p class="fst-italic" align="center">Rasa:<br> boba ini memiliki rasa sejuta kerinduan</p>
-      </div>
+      <?php $counter++; }?>
+      <!-- end of looping php -->
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
