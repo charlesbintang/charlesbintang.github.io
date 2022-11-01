@@ -69,7 +69,6 @@ $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
             <div class="card-body">
               <!-- php -->
               <?php 
-              $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
               $sql1 = "SELECT * FROM menu_costumer WHERE id_menu = '3'";
               $result1 = mysqli_query($koneksi ,$sql1);
               $produk1 = mysqli_fetch_array($result1);
