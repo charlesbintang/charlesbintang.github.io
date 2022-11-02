@@ -57,7 +57,7 @@
 <!-- Close Navbar -->
 
 <main>
-<h2 align="center" height="40%" class="textt">Best Seller</h2>
+<h2 align="center" height="40%" class="textt">Menu</h2>
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <!-- looping php -->
@@ -104,9 +104,7 @@
 
 <footer>
   <nav class="navbar navbar-expand-lg fixed-bottom bg-green">
-    <div class="container-fluid" style="
-                                        padding-right: 0;
-                                        padding-left: 0;">
+    <div class="container-fluid" style="padding-right: 0; padding-left: 0;">
       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-warning">
           <svg xmlns="http://www.w3.org/2000/svg" width="25%" viewBox="0 0 30 30">
