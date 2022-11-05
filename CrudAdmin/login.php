@@ -3,20 +3,20 @@
     $ingataku = "";
     $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
 
-    if (isset($_COOKIE['cookie_username'])){
-        $cookie_username = $_COOKIE['cookie_username'];
-        $cookie_password = $_COOKIE['cookie_password'];
+    if (isset($_COOKIE['cookie_username_admin'])){
+        $cookie_username_admin = $_COOKIE['cookie_username_admin'];
+        $cookie_password_admin = $_COOKIE['cookie_password_admin'];
     
-        $query = "SELECT * FROM admin WHERE nama_admin = '$cookie_username'";
+        $query = "SELECT * FROM admin WHERE nama_admin = '$cookie_username_admin'";
         $result = mysqli_query($koneksi,$query);
         $check = mysqli_fetch_array($result);
-        if ($check['kata_sandi'] == $cookie_password){
-            $_SESSION['session_username'] = $cookie_username;
-            $_SESSION['session_password'] = $cookie_password;
+        if ($check['kata_sandi'] == $cookie_password_admin){
+            $_SESSION['session_username_admin'] = $cookie_username_admin;
+            $_SESSION['session_password_admin'] = $cookie_password_admin;
         }                 
     }
 
-    if(isset($_SESSION['session_username'])){
+    if(isset($_SESSION['session_username_admin'])){
         header("location: index.php");
         exit();
     }
@@ -42,18 +42,18 @@
             } 
 
             if($err != 1){
-                $_SESSION['session_username'] = $username; //tersimpan dalam server
-                $_SESSION['session_password'] = md5($password);
+                $_SESSION['session_username_admin'] = $username; //tersimpan dalam server
+                $_SESSION['session_password_admin'] = md5($password);
 
                 if($ingataku == 1){
-                    $cookie_name = "cookie_username";
+                    $cookie_name = "cookie_username_admin";
                     $cookie_value = $username;
-                    $cookie_time = time() + (60 * 60 * 6); //detik, menit, jam. time() digunakan untuk mengambil waktu sekarang
+                    $cookie_time = time() + (60 * 60 * 2); //detik, menit, jam. time() digunakan untuk mengambil waktu sekarang
                     setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
-                    $cookie_name = "cookie_password";
+                    $cookie_name = "cookie_password_admin";
                     $cookie_value = md5($password);
-                    $cookie_time = time() + (60 * 60 * 6); 
+                    $cookie_time = time() + (60 * 60 * 2); 
                     setcookie($cookie_name, $cookie_value, $cookie_time, "/");
                 }
 
