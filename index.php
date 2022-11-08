@@ -1,185 +1,158 @@
 <?php
-    session_start();
-    $ingataku = "";
+  session_start();
+  date_default_timezone_set("Asia/Jakarta");
+  if(!isset($_SESSION['session_username'])){
+    header("location: login.php");
+  } 
     $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
-
-    if (isset($_COOKIE['cookie_username'])){
-        $cookie_username = $_COOKIE['cookie_username'];
-        $cookie_password = $_COOKIE['cookie_password'];
-    
-        $query = "SELECT * FROM customer WHERE nama_customer = '$cookie_username'";
-        $result = mysqli_query($koneksi,$query);
-        $check = mysqli_fetch_array($result);
-        if ($check["kata_sandi"] == $cookie_password){
-            $_SESSION['session_username'] = $cookie_username;
-            $_SESSION['session_password'] = $cookie_password;
-            header("location: MenuUtama.php");
-            exit();
-        }                 
-    }
-
-    if(isset($_POST['login'])){
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $ingataku = $_POST['ingataku'];
-
-        if($username == '' or $password == ''){
-            echo "<script> 
-                alert('Silahkan masukkan username dan password Anda'); 
-                window.location = 'index.php'; 
-                </script>";
-        } else {
-            $query = "SELECT * FROM customer WHERE nama_customer = '$username'";
-            $result = mysqli_query($koneksi, $query);
-            $check = mysqli_fetch_array($result);
-
-            if($check['nama_customer'] == '' || $check['kata_sandi'] != md5($password)){ 
-                $err = 1;
-            } 
-
-            if($err != 1){
-                $_SESSION['session_username'] = $username; //tersimpan dalam server
-                $_SESSION['session_password'] = md5($password);
-
-                if($ingataku == 1){
-                    $cookie_name = "cookie_username";
-                    $cookie_value = $username;
-                    $cookie_time = time() + (60 * 60 * 1); //detik, menit, jam. time() digunakan untuk mengambil waktu sekarang
-                    setcookie($cookie_name, $cookie_value, $cookie_time, "/");
-
-                    $cookie_name = "cookie_password";
-                    $cookie_value = md5($password);
-                    $cookie_time = time() + (60 * 60 * 1); 
-                    setcookie($cookie_name, $cookie_value, $cookie_time, "/");
-                }
-
-                header("location: MenuUtama.php");
-            } else {
-                echo "<script>
-                    alert('Username atau password salah');
-                    window.location = 'index.php';
-                    </script>";
-            }
-        }
-    }
+    $sesUnCus = $_SESSION['session_username'];
+    $qry = "SELECT id_customer FROM customer WHERE nama_customer = '$sesUnCus';";
+    $sqlIdCus = mysqli_query($koneksi, $qry);
+    $idCustomer = mysqli_fetch_array($sqlIdCus);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In | Bobaho</title>
-
-    <style>
-        body {
-            background-color: #69916F;
-            margin: 0;
-            padding: 0;
-        }
-        .MainContainer {
-            width: 350px;
-            height: 500px;
-            border-radius: 45px;
-            background-color: #D6D5D5;
-            margin: auto;
-            margin-top: 230px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-        .person {
-            display: flex;
-            justify-content: center;
-        }
-        #emaill {
-            box-shadow: inset 3px 3px 4px rgba(0,0,0,0.4) ;
-            padding: 10px;
-            border: 1px solid grey;
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            padding: 1em;
-            border-radius: 25px;
-            margin: auto;
-            border: 2px solid transparent;
-            outline: none;
-            width: 234px;
-            height: 40px;
-            background-color: #d3d2d2;
-            margin-top: 30px;
-            font-size: larger;
-        }
-
-        button {
-            
-            width: 270px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            box-shadow: -3px -3px 4px rgba(255, 255, 255, 0.582), 3px 3px 4px rgba(0,0,0,0.4);
-            padding: 19.2px;
-            border-radius: 20px;
-            border: 2px solid transparent;
-            background-color: #d3d2d2dc;
-            font-size: larger;
-            margin-top: 20px
-            outline: none;
-            justify-content: center;
-        
-        }
-        button:hover {
-        background:#d6dad6d3;
-        color:#000000;
-        
-           
-        }
-        button:active {
-            background: #caceca;
-            color: #000000;
-            font-weight: bold;
-        }
-
-        .input {
-            margin-top: -30px;
-        }
-
-        @media all and (min-width: 700px) {
-            .MainContainer {
-            width: 550px;
-            height: 700px;}
-            
-            #emaill {
-            width: 384px;
-            height: 40px;
-            }
-
-            button {
-            width: 420px;
-            height: 55px;}
-        }
-    </style>
+    <title>Bobaho</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="menuUtama.css?v=0.0.1">
+    
 </head>
 <body>
-    <div class="MainContainer">
-        <img width="50px" height="56px" style="margin-top: 0px" src="aset boba/person.png" alt="">
-        SIGN IN
-        
-        <form action="" method="post">
-        <div class="input">
-        <label class="form-label"></label>
-        <input type="text" class="form-control" id="emaill" name="username"  placeholder="Username">
-        <label class="form-label"></label>
-        <input type="password" class="form-control" id="emaill" name="password" style="margin-bottom: 10px;" placeholder="Password">
-        <label class="form-label" style="margin-left: 40px;">Ingat Saya</label>
-        <input type="checkbox" name="ingataku" value="1" <?php if($ingataku == '1') echo "checked"?>> <br>
-        <button class="Button" type="submit" name="login" value="Login" style="margin-top: 20px;">Sign In</button>
+    <!-- Navbar -->
+<header>
+  <nav class="navbar navbar-expand-lg fixed-top bg-green">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Boba and Tea</a>
+      <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width=25%>
+    
+        <form class="d-flex" role="search" >
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <div class="wrapper-scroll">
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Best&nbsp;Seller</button><br>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">New&nbsp;Series</button><br>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Coffee</button>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Fruit&nbsp;&&nbsp;Smothies</button>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Yakult</button>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Mocktail</button>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary">Tea&nbsp;Series</button>
+          </div>
         </div>
-        </form>        
+      </div>
     </div>
-        <p align="center">Belum punya akun? <a href="daftar.php">Daftar di sini!</a></p>
+  </nav>
+</header>
+<!-- Close Navbar -->
+
+<main>
+<h2 align="center" height="40%" class="textt">Menu</h2>
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- looping php -->
+      <?php
+        $sql = "SELECT * FROM menu_costumer";
+        $result = mysqli_query($koneksi ,$sql);
+        $counter = 1;
+        while($row = mysqli_fetch_array($result)) {
+      ?>
+      <div class="carousel-item <? if($counter <=1){ echo "active";} ?> ">
+        <div class="card" style="width: 10rem;">
+            <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
+            <div class="card-body">
+              <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
+              <p class="card-text"><?php echo $row["harga"]; ?></p>
+              <button type="button" class="btn btn-light" onclick="decrement<?php echo $row['js_btn'];?>()">-</button>
+              <span id="valueDisplay<?php echo $row['js_btn'];?>" class="box">0</span>
+              <button type="button" class="btn btn-light" onclick="increment<?php echo $row['js_btn'];?>()">+</button>
+              <script>
+                let count<?php echo $row['js_btn'];?> = 0;
+                const valueDisplay<?php echo $row['js_btn'];?> = document.getElementById("valueDisplay<?php echo $row['js_btn'];?>");
+                increment<?php echo $row['js_btn'];?>();
+                decrement<?php echo $row['js_btn'];?>();
+              </script>
+            </div>
+          </div>
+          <br>
+          <p class="fst-italic" align="center">Rasa:<br> <?php echo $row["catatan"]?></p>
+      </div>
+      <?php $counter++; }?>
+      <!-- end of looping php -->
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  <?php
+  echo '
+  <form action="addToCart.php" method="post">
+  <input type="hidden" name="id_customer" value="'.$idCustomer['id_customer'].'">
+  <input type="hidden" name="id_menu" value="8">
+  <input type="hidden" name="jumlah_pesanan" value="4">
+  <input type="hidden" name="harga" value="Rp 14.000">
+  <input type="hidden" name="total_pesanan" value="4">
+  <input type="hidden" name="total_harga" value="Rp 56.000">
+  <input type="hidden" name="catatan" value="Apa itu gulaaa">
+  <input type="hidden" name="tanggal" value='.date('d-m-Y').'>
+  <button type="submit" name="submit" value='.date('H:i:s').'>Pesan!</button>
+  </form>';
+  ?>
+</main>
+
+<footer>
+  <nav class="navbar navbar-expand-lg fixed-bottom bg-green">
+    <div class="container-fluid" style="padding-right: 0; padding-left: 0;">
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25%" viewBox="0 0 30 30">
+            <path fill="#000000" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+         </svg>
+        </button>
+        <!-- btn Lihat Keranjang -->
+        <button type="button" class="btn btn-warning" onclick="document.location.href = 'Topping.php'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25%" viewBox="0 0 30 30">
+            <path fill="#000000" d="M10 0V4H8L12 8L16 4H14V0M1 2V4H3L6.6 11.6L5.2 14C5.1 14.3 5 14.6 5 15C5 16.1 5.9 17 7 17H19V15H7.4C7.3 15 7.2 14.9 7.2 14.8V14.7L8.1 13H15.5C16.2 13 16.9 12.6 17.2 12L21.1 5L19.4 4L15.5 11H8.5L4.3 2M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18Z" />
+         </svg>
+        </button>
+      </div>  
+    </div>
+  </nav>
+</footer>
+
+<!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" 
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+<!-- fungsi Button -->
+  <script src="button.js"></script>
 </body>
 </html>
