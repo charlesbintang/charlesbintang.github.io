@@ -79,7 +79,7 @@
         $counter = 1;
         while($row = mysqli_fetch_array($result)) {
       ?>
-      <div class="carousel-item <? if($counter <=1){ echo "active";} ?> ">
+      <div class="carousel-item <?php if($counter <=1){ echo "active";} ?> ">
         <div class="card" style="width: 10rem;">
             <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
             <div class="card-body">
@@ -98,6 +98,21 @@
           </div>
           <br>
           <p class="fst-italic" align="center">Rasa:<br> <?php echo $row["catatan"]?></p>
+          <button>halo</button>
+          <?php
+          echo '
+          <form action="addToCart.php" method="post">
+          <input type="hidden" name="id_customer" value="'.$idCustomer['id_customer'].'">
+          <input type="hidden" name="id_menu" value="'.$row['id_menu'].'">
+          <input type="hidden" name="jumlah_pesanan" value="4">
+          <input type="hidden" name="harga" value="'.$row['harga'].'">
+          <input type="hidden" name="total_pesanan" value="4">
+          <input type="hidden" name="total_harga" value="Rp 56.000">
+          <input type="hidden" name="catatan" value="Apa itu gulaaa">
+          <input type="hidden" name="tanggal" value='.date('d-m-Y').'>
+          <button type="submit" name="submit" value='.date('H:i:s').' style="align:center;">Pesan!</button>
+          </form>';
+          ?>
       </div>
       <?php $counter++; }?>
       <!-- end of looping php -->
@@ -112,20 +127,7 @@
     </button>
   </div>
   
-  <?php
-  echo '
-  <form action="addToCart.php" method="post">
-  <input type="hidden" name="id_customer" value="'.$idCustomer['id_customer'].'">
-  <input type="hidden" name="id_menu" value="8">
-  <input type="hidden" name="jumlah_pesanan" value="4">
-  <input type="hidden" name="harga" value="Rp 14.000">
-  <input type="hidden" name="total_pesanan" value="4">
-  <input type="hidden" name="total_harga" value="Rp 56.000">
-  <input type="hidden" name="catatan" value="Apa itu gulaaa">
-  <input type="hidden" name="tanggal" value='.date('d-m-Y').'>
-  <button type="submit" name="submit" value='.date('H:i:s').'>Pesan!</button>
-  </form>';
-  ?>
+  
 </main>
 
 <footer>
