@@ -85,22 +85,22 @@
             <div class="card-body">
               <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
               <p class="card-text"><?php echo $row["harga"]; ?></p>
-              <button type="button" class="btn btn-light" onclick="decrement<?php echo $row['js_btn'];?>()">-</button>
-              <span id="valueDisplay<?php echo $row['js_btn'];?>" class="box">0</span>
-              <button type="button" class="btn btn-light" onclick="increment<?php echo $row['js_btn'];?>()">+</button>
+              <button type="button" class="btn btn-light" onclick="decrement<?php echo $row['id_menu'];?>()">-</button>
+              <span id="valueDisplay<?php echo $row['id_menu'];?>" class="box">0</span>
+              <button type="button" class="btn btn-light" onclick="increment<?php echo $row['id_menu'];?>()">+</button>
               <script>
-                let count<?php echo $row['js_btn'];?> = 0;
-                const valueDisplay<?php echo $row['js_btn'];?> = document.getElementById("valueDisplay<?php echo $row['js_btn'];?>");
+                let count<?php echo $row['id_menu'];?> = 0;
+                const valueDisplay<?php echo $row['id_menu'];?> = document.getElementById("valueDisplay<?php echo $row['id_menu'];?>");
 
-                function increment<?php echo $row['js_btn'];?>() {
-                  count<?php echo $row['js_btn'];?>++;
-                  valueDisplay<?php echo $row['js_btn'];?>.innerText = count<?php echo $row['js_btn'];?>;
+                function increment<?php echo $row['id_menu'];?>() {
+                  count<?php echo $row['id_menu'];?>++;
+                  valueDisplay<?php echo $row['id_menu'];?>.innerText = count<?php echo $row['id_menu'];?>;
                 }
                     
-                function decrement<?php echo $row['js_btn'];?>() {
-                  if(count<?php echo $row['js_btn'];?> > 0) {
-                    count<?php echo $row['js_btn'];?>--;
-                    valueDisplay<?php echo $row['js_btn'];?>.innerText = count<?php echo $row['js_btn'];?>;
+                function decrement<?php echo $row['id_menu'];?>() {
+                  if(count<?php echo $row['id_menu'];?> > 0) {
+                    count<?php echo $row['id_menu'];?>--;
+                    valueDisplay<?php echo $row['id_menu'];?>.innerText = count<?php echo $row['id_menu'];?>;
                     }
                 }
               </script>
@@ -119,7 +119,7 @@
           <input type="hidden" name="total_harga" value="Rp 56.000">
           <input type="hidden" name="catatan" value="Apa itu gulaaa">
           <input type="hidden" name="tanggal" value='.date('d-m-Y').'>
-          <button type="submit" name="submit" value='.date('H:i:s').' style="align:center;">Pesan!</button>
+          <button type="submit" name="submit" value='.date('H:i:s').' style="display:flex; margin:auto;">Pesan!</button>
           </form>';
           ?>
       </div>

@@ -23,7 +23,7 @@ if ($saved){
   echo '
   <script> 
   alert("Pesanan telah ditambahkan ke keranjang!");
-  document.location.href = history.go(-1);
+  document.location.href = "index.php";
   </script>
 
   ';
