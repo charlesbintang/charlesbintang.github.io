@@ -91,14 +91,23 @@
               <script>
                 let count<?php echo $row['js_btn'];?> = 0;
                 const valueDisplay<?php echo $row['js_btn'];?> = document.getElementById("valueDisplay<?php echo $row['js_btn'];?>");
-                increment<?php echo $row['js_btn'];?>();
-                decrement<?php echo $row['js_btn'];?>();
+
+                function increment<?php echo $row['js_btn'];?>() {
+                  count<?php echo $row['js_btn'];?>++;
+                  valueDisplay<?php echo $row['js_btn'];?>.innerText = count<?php echo $row['js_btn'];?>;
+                }
+                    
+                function decrement<?php echo $row['js_btn'];?>() {
+                  if(count<?php echo $row['js_btn'];?> > 0) {
+                    count<?php echo $row['js_btn'];?>--;
+                    valueDisplay<?php echo $row['js_btn'];?>.innerText = count<?php echo $row['js_btn'];?>;
+                    }
+                }
               </script>
             </div>
           </div>
           <br>
           <p class="fst-italic" align="center">Rasa:<br> <?php echo $row["catatan"]?></p>
-          <button>halo</button>
           <?php
           echo '
           <form action="addToCart.php" method="post">
@@ -153,8 +162,5 @@
 <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" 
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-
-<!-- fungsi Button -->
-  <script src="button.js"></script>
 </body>
 </html>
