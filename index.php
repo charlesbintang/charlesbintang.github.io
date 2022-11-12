@@ -85,14 +85,15 @@
               <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
               <p class="card-text"><?php echo $row["harga"]; ?></p>
 
-              <button id='decrement<?php echo $row['id_menu'];?>' aria-hidden="true" tabIndex="-1">-</button>
+              <button id='decrement<?php echo $row['id_menu'];?>' aria-hidden="true" onclick="displayDecrement<?php echo $row['id_menu'];?>()">-</button>
+              <span id="valueDisplay<?php echo $row['id_menu'];?>" class="box">1</span>
               <!-- <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="number" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0"> -->
-              <button id='increment<?php echo $row['id_menu'];?>' aria-hidden="true" tabIndex="-1">+</button>
+              <button id='increment<?php echo $row['id_menu'];?>' aria-hidden="true" onclick="displayIncrement<?php echo $row['id_menu'];?>()">+</button>
 
               <form action="addToCart.php" method="post">
               <input type="hidden" name="id_customer" value="<?php echo $idCustomer['id_customer']?>">
               <input type="hidden" name="id_menu" value="<? echo $row['id_menu']?>">
-              <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="number" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" keyboard>
+              <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="hidden" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" >
               <input type="hidden" name="harga" value="<?php echo $row['harga']?>">
               <input type="hidden" name="total_pesanan" value="12">
               <input type="hidden" name="total_harga" value="12">
@@ -101,6 +102,21 @@
               <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" style="display:flex; margin:auto; padding:0px 10px;">Pesan!</button>
               </form>
               <script>
+                let count<?php echo $row['id_menu'];?>= 1;
+                const valueDisplay<?php echo $row['id_menu'];?> = document.getElementById("valueDisplay<?php echo $row['id_menu'];?>");
+
+                function displayIncrement<?php echo $row['id_menu'];?>() {
+                  count<?php echo $row['id_menu'];?>++;
+                  valueDisplay<?php echo $row['id_menu'];?>.innerText = count<?php echo $row['id_menu'];?>;
+                }
+
+                function displayDecrement<?php echo $row['id_menu'];?>() {
+                  if(count<?php echo $row['id_menu'];?> > 1) {
+                    count<?php echo $row['id_menu'];?>--;
+                    valueDisplay<?php echo $row['id_menu'];?>.innerText = count<?php echo $row['id_menu'];?>;
+                  }
+                }
+
               /** @type {!Element} The input element. */
               let inputEl<?php echo $row['id_menu'];?>;
               /** @type {!Element} The button up element. */
