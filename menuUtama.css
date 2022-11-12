@@ -208,8 +208,9 @@ padding-right: 10%;
   border-bottom-left-radius: 0;
 }
 
-.input {
-  width:30px;  
-  margin:auto;
-  padding:0px 0px 0px 8px;
+.inputt {
+  text-align: center;
+  margin: auto;
+  width: 25%;
+  margin-bottom:10px;
 }

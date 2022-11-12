@@ -85,165 +85,163 @@
               <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
               <p class="card-text"><?php echo $row["harga"]; ?></p>
 
-              <button id='increment<?php $row['id_menu'];?>' aria-hidden="true" tabIndex="0">+</button>
-              <input class="input" id="input<?php $row['id_menu'];?>" type="number" value="1" aria-valuemin="1" autocomplete="off" aria-valuemax="100" aria-valuenow="1" tabIndex="0">
-              <button id='decrement<?php $row['id_menu'];?>' aria-hidden="true" tabIndex="0">-</button>
-              
+              <button id='decrement<?php echo $row['id_menu'];?>' aria-hidden="true" tabIndex="-1">-</button>
+              <!-- <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="number" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0"> -->
+              <button id='increment<?php echo $row['id_menu'];?>' aria-hidden="true" tabIndex="-1">+</button>
+
+              <form action="addToCart.php" method="post">
+              <input type="hidden" name="id_customer" value="<?php echo $idCustomer['id_customer']?>">
+              <input type="hidden" name="id_menu" value="<? echo $row['id_menu']?>">
+              <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="number" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" keyboard>
+              <input type="hidden" name="harga" value="<?php echo $row['harga']?>">
+              <input type="hidden" name="total_pesanan" value="12">
+              <input type="hidden" name="total_harga" value="12">
+              <input type="hidden" name="catatan" value="Apa itu gulaaa">
+              <input type="hidden" name="tanggal" value="<?php echo date('d-m-Y'); ?>">
+              <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" style="display:flex; margin:auto; padding:0px 10px;">Pesan!</button>
+              </form>
               <script>
               /** @type {!Element} The input element. */
-      let inputEl<?php $row['id_menu'];?>;
-      /** @type {!Element} The button up element. */
-      let incrementButtonEl<?php $row['id_menu'];?>;
-      /** @type {!Element} The button down element. */
-      let decrementButtonEl<?php $row['id_menu'];?>;
+              let inputEl<?php echo $row['id_menu'];?>;
+              /** @type {!Element} The button up element. */
+              let incrementButtonEl<?php echo $row['id_menu'];?>;
+              /** @type {!Element} The button down element. */
+              let decrementButtonEl<?php echo $row['id_menu'];?>;
 
-      /** @type {number} The value as a number. */
-      let valueNumber<?php $row['id_menu'];?>;
-      /** @type {string} The string value of the input. */
-      let valueText<?php $row['id_menu'];?>;
+              /** @type {number} The value as a number. */
+              let valueNumber<?php echo $row['id_menu'];?>;
+              /** @type {string} The string value of the input. */
+              let valueText<?php echo $row['id_menu'];?>;
 
-      /** @type {number} Constant representing aria-valuemax. */
-      let MIN_VALUE<?php $row['id_menu'];?>;
-      /** @type {number} Constant representing aria-valuemin. */
-      let MAX_VALUE<?php $row['id_menu'];?>;
-      /** @type {number} Constant representing the initial aria-valuenow. */
-      let INITIAL_VALUE<?php $row['id_menu'];?>;
-      /** @type {number} Constant representing increment/decrement size. */
-      let STEP_SIZE<?php $row['id_menu'];?>;
+              /** @type {number} Constant representing aria-valuemax<?php echo $row['id_menu'];?>. */
+              let MIN_VALUE<?php echo $row['id_menu'];?>;
+              /** @type {number} Constant representing aria-valuemin<?php echo $row['id_menu'];?>. */
+              let MAX_VALUE<?php echo $row['id_menu'];?>;
+              /** @type {number} Constant representing the initial aria-valuenow<?php echo $row['id_menu'];?>. */
+              let INITIAL_VALUE<?php echo $row['id_menu'];?>;
+              /** @type {number} Constant representing increment/decrement size. */
+              let STEP_SIZE<?php echo $row['id_menu'];?>;
 
-      function init() {
-        inputEl<?php $row['id_menu'];?> = document.getElementById('input<?php $row['id_menu'];?>');
-        incrementButtonEl<?php $row['id_menu'];?> = document.getElementById('increment<?php $row['id_menu'];?>');
-        decrementButtonEl<?php $row['id_menu'];?> = document.getElementById('decrement<?php $row['id_menu'];?>');
-        MIN_VALUE<?php $row['id_menu'];?> = Number(inputEl<?php $row['id_menu'];?>.getAttribute('aria-valuemin'));
-        MAX_VALUE<?php $row['id_menu'];?> = Number(inputEl<?php $row['id_menu'];?>.getAttribute('aria-valuemax'));
-        valueNumber<?php $row['id_menu'];?> = Number(inputEl<?php $row['id_menu'];?>.getAttribute('aria-valuenow'));
-        valueText<?php $row['id_menu'];?> = inputEl<?php $row['id_menu'];?>.value;
-        INITIAL_VALUE<?php $row['id_menu'];?> = valueNumber<?php $row['id_menu'];?>;
-        STEP_SIZE<?php $row['id_menu'];?> = 1;
-        setEventListeners();
-      }
+              function init() {
+                inputEl<?php echo $row['id_menu'];?> = document.getElementById('input<?php echo $row['id_menu'];?>');
+                incrementButtonEl<?php echo $row['id_menu'];?> = document.getElementById('increment<?php echo $row['id_menu'];?>');
+                decrementButtonEl<?php echo $row['id_menu'];?> = document.getElementById('decrement<?php echo $row['id_menu'];?>');
+                MIN_VALUE<?php echo $row['id_menu'];?> = Number(inputEl<?php echo $row['id_menu'];?>.getAttribute('aria-valuemin<?php echo $row['id_menu'];?>'));
+                MAX_VALUE<?php echo $row['id_menu'];?> = Number(inputEl<?php echo $row['id_menu'];?>.getAttribute('aria-valuemax<?php echo $row['id_menu'];?>'));
+                valueNumber<?php echo $row['id_menu'];?> = Number(inputEl<?php echo $row['id_menu'];?>.getAttribute('aria-valuenow<?php echo $row['id_menu'];?>'));
+                valueText<?php echo $row['id_menu'];?> = inputEl<?php echo $row['id_menu'];?>.value;
+                INITIAL_VALUE<?php echo $row['id_menu'];?> = valueNumber<?php echo $row['id_menu'];?>;
+                STEP_SIZE<?php echo $row['id_menu'];?> = 1;
+                setEventListeners<?php echo $row['id_menu'];?>();
+              }
 
-      function setEventListeners() {
-        inputEl<?php $row['id_menu'];?>.addEventListener('input', handleInputInput, false);
-        inputEl<?php $row['id_menu'];?>.addEventListener('keydown', handleInputKeyDown, false);
-        incrementButtonEl<?php $row['id_menu'];?>.addEventListener('click', handleIncrementButtonClick, false);
-        decrementButtonEl<?php $row['id_menu'];?>.addEventListener('click', handleDecrementButtonClick, false);
-      }
+              function setEventListeners<?php echo $row['id_menu'];?>() {
+                inputEl<?php echo $row['id_menu'];?>.addEventListener('input', handleInputInput<?php echo $row['id_menu'];?>, false);
+                inputEl<?php echo $row['id_menu'];?>.addEventListener('keydown', handleInputKeyDown<?php echo $row['id_menu'];?>, false);
+                incrementButtonEl<?php echo $row['id_menu'];?>.addEventListener('click', handleIncrementButtonClick<?php echo $row['id_menu'];?>, false);
+                decrementButtonEl<?php echo $row['id_menu'];?>.addEventListener('click', handleDecrementButtonClick<?php echo $row['id_menu'];?>, false);
+              }
 
-      function handleIncrementButtonClick(e) {
-        increment();
-        inputEl<?php $row['id_menu'];?>.focus();
-      }
-
-
-      function handleDecrementButtonClick(e) {0
-        decrement();
-        inputEl<?php $row['id_menu'];?>.focus();
-      }
-
-      /**
-      * Sets input field to default upon blur of the empty input.
-      * Sets value to default if value is no longer valid.
-      * Otherwise truncates value and updates aria-valuenow.
-      * @param {!Event} e
-      */
-      function handleInputInput(e) {
-        if (!input.value || input.value === '-' || input.value === '.') {
-          // clear the value.
-          inputEl<?php $row['id_menu'];?>.setAttribute('aria-valuenow', '');
-          valueNumber<?php $row['id_menu'];?> = null;
-          valueText<?php $row['id_menu'];?> = input.value;
-          return;
-        }
-        let newValueNumber<?php $row['id_menu'];?> = Number(input.value);
-        if (isNaN(newValueNumber<?php $row['id_menu'];?>)) {
-          input.value = valueText<?php $row['id_menu'];?>;
-        } else {
-          // Note that this will set an invalid aria-valuenow.
-          // Bug tracking how and when to modify aria-valuenow:
-          // https://github.com/w3c/aria-practices/issues/704
-          setValue(newValueNumber<?php $row['id_menu'];?>);
-        }
-      }
-
-      /**
-      * Switch that handles all valid non-numerical key downs.
-      * @param {!Event} e
-      */
-      function handleInputKeyDown(e) {
-        switch (e.key) {
-          case 'ArrowUp':
-            increment();
-            break;
-          case 'ArrowDown':
-            decrement();
-            break;
-          case 'Home':
-            setValue(MIN_VALUE<?php $row['id_menu'];?>);
-            break;
-          case 'End':
-            setValue(MAX_VALUE<?php $row['id_menu'];?>);
-            break;
-          default:
-            return;
-        }
-        e.preventDefault();
-        e.stopPropagation();
-      }
-
-      // add jsdoc
-      function increment() {
-        if (valueNumber<?php $row['id_menu'];?> >= MAX_VALUE<?php $row['id_menu'];?>) {
-          setValue(MAX_VALUE<?php $row['id_menu'];?>);
-        } else if (valueNumber<?php $row['id_menu'];?> < MIN_VALUE<?php $row['id_menu'];?>) {
-          setValue(MIN_VALUE<?php $row['id_menu'];?>);
-        } else {
-          setValue(valueNumber<?php $row['id_menu'];?> + STEP_SIZE<?php $row['id_menu'];?>)
-        }
-      }
-
-      // add jsdoc
-      function decrement() {
-        if (valueNumber<?php $row['id_menu'];?> <= MIN_VALUE<?php $row['id_menu'];?>) {
-          setValue(MIN_VALUE<?php $row['id_menu'];?>);
-        } else if (valueNumber<?php $row['id_menu'];?> > MAX_VALUE<?php $row['id_menu'];?>) {
-          setValue(MAX_VALUE<?php $row['id_menu'];?>);
-        } else {
-          setValue(valueNumber<?php $row['id_menu'];?> - STEP_SIZE<?php $row['id_menu'];?>)
-        }
-      }
-
-      /**
-      * Sets value property and aria-valuenow attribute together.
-      * @param {number} newValue
-      */
-      function setValue(newValue) {
-        inputEl<?php $row['id_menu'];?>.value = newValue;
-        inputEl<?php $row['id_menu'];?>.setAttribute('aria-valuenow', newValue);
-        valueNumber<?php $row['id_menu'];?> = newValue;
-        valueText<?php $row['id_menu'];?> = inputEl<?php $row['id_menu'];?>.value;
-      }
+              function handleIncrementButtonClick<?php echo $row['id_menu'];?>(e) {
+                increment<?php echo $row['id_menu'];?>();
+                inputEl<?php echo $row['id_menu'];?>.focus();
+              }
 
 
-      window.addEventListener('load', init, false);
-              </script>
+              function handleDecrementButtonClick<?php echo $row['id_menu'];?>(e) {0
+                decrement<?php echo $row['id_menu'];?>();
+                inputEl<?php echo $row['id_menu'];?>.focus();
+              }
+
+              /**
+              * Sets input field to default upon blur of the empty input.
+              * Sets value to default if value is no longer valid.
+              * Otherwise truncates value and updates aria-valuenow<?php echo $row['id_menu'];?>.
+              * @param {!Event} e
+              */
+              function handleInputInput<?php echo $row['id_menu'];?>(e) {
+                if (!input.value || input.value === '-' || input.value === '.') {
+                  // clear the value.
+                  inputEl<?php echo $row['id_menu'];?>.setAttribute('aria-valuenow<?php echo $row['id_menu'];?>', '');
+                  valueNumber<?php echo $row['id_menu'];?> = null;
+                  valueText<?php echo $row['id_menu'];?> = input.value;
+                  return;
+                }
+                let newValueNumber<?php echo $row['id_menu'];?> = Number(input.value);
+                if (isNaN(newValueNumber<?php echo $row['id_menu'];?>)) {
+                  input.value = valueText<?php echo $row['id_menu'];?>;
+                } else {
+                  // Note that this will set an invalid aria-valuenow<?php echo $row['id_menu'];?>.
+                  // Bug tracking how and when to modify aria-valuenow<?php echo $row['id_menu'];?>:
+                  // https://github.com/w3c/aria-practices/issues/704
+                  setValue<?php echo $row['id_menu'];?>(newValueNumber<?php echo $row['id_menu'];?>);
+                }
+              }
+
+              /**
+              * Switch that handles all valid non-numerical key downs.
+              * @param {!Event} e
+              */
+              function handleInputKeyDown<?php echo $row['id_menu'];?>(e) {
+                switch (e.key) {
+                  case 'ArrowUp':
+                    increment<?php echo $row['id_menu'];?>();
+                    break;
+                  case 'ArrowDown':
+                    decrement<?php echo $row['id_menu'];?>();
+                    break;
+                  case 'Home':
+                    setValue<?php echo $row['id_menu'];?>(MIN_VALUE<?php echo $row['id_menu'];?>);
+                    break;
+                  case 'End':
+                    setValue<?php echo $row['id_menu'];?>(MAX_VALUE<?php echo $row['id_menu'];?>);
+                    break;
+                  default:
+                    return;
+                }
+                e.preventDefault();
+                e.stopPropagation();
+              }
+
+              // add jsdoc
+              function increment<?php echo $row['id_menu'];?>() {
+                if (valueNumber<?php echo $row['id_menu'];?> >= MAX_VALUE<?php echo $row['id_menu'];?>) {
+                  setValue<?php echo $row['id_menu'];?>(MAX_VALUE<?php echo $row['id_menu'];?>);
+                } else if (valueNumber<?php echo $row['id_menu'];?> < MIN_VALUE<?php echo $row['id_menu'];?>) {
+                  setValue<?php echo $row['id_menu'];?>(MIN_VALUE<?php echo $row['id_menu'];?>);
+                } else {
+                  setValue<?php echo $row['id_menu'];?>(valueNumber<?php echo $row['id_menu'];?> + STEP_SIZE<?php echo $row['id_menu'];?>)
+                }
+              }
+
+              // add jsdoc
+              function decrement<?php echo $row['id_menu'];?>() {
+                if (valueNumber<?php echo $row['id_menu'];?> <= MIN_VALUE<?php echo $row['id_menu'];?>) {
+                  setValue<?php echo $row['id_menu'];?>(MIN_VALUE<?php echo $row['id_menu'];?>);
+                } else if (valueNumber<?php echo $row['id_menu'];?> > MAX_VALUE<?php echo $row['id_menu'];?>) {
+                  setValue<?php echo $row['id_menu'];?>(MAX_VALUE<?php echo $row['id_menu'];?>);
+                } else {
+                  setValue<?php echo $row['id_menu'];?>(valueNumber<?php echo $row['id_menu'];?> - STEP_SIZE<?php echo $row['id_menu'];?>)
+                }
+              }
+
+              /**
+              * Sets value property and aria-valuenow<?php echo $row['id_menu'];?> attribute together.
+              * @param {number} newValue
+              */
+              function setValue<?php echo $row['id_menu'];?>(newValue<?php echo $row['id_menu'];?>) {
+                inputEl<?php echo $row['id_menu'];?>.value = newValue<?php echo $row['id_menu'];?>;
+                inputEl<?php echo $row['id_menu'];?>.setAttribute('aria-valuenow<?php echo $row['id_menu'];?>', newValue<?php echo $row['id_menu'];?>);
+                valueNumber<?php echo $row['id_menu'];?> = newValue<?php echo $row['id_menu'];?>;
+                valueText<?php echo $row['id_menu'];?> = inputEl<?php echo $row['id_menu'];?>.value;
+              }
+
+            
+
+              window.addEventListener('load', init, false);
+                      </script>
               <!-- <span id="valueDisplay" class="box">1</span> -->
               
-              <?php
-              echo '
-              <form action="addToCart.php" method="post">
-              <input type="hidden" name="id_customer" value="'.$idCustomer['id_customer'].'">
-              <input type="hidden" name="id_menu" value="'.$row['id_menu'].'">
-              <input type="hidden" name="jumlah_pesanan" value = "" >
-              <input type="hidden" name="harga" value="'.$row['harga'].'">
-              <input type="hidden" name="total_pesanan" value="4">
-              <input type="hidden" name="total_harga" value="Rp 56.000">
-              <input type="hidden" name="catatan" value="Apa itu gulaaa">
-              <input type="hidden" name="tanggal" value='.date('d-m-Y').'>
-              <button type="submit" name="submit" value='.date('H:i:s').' style="display:flex; margin:auto; margin-top:10px; padding:0px 10px;">Pesan!</button>
-              </form>';
-              ?>
             </div>
           </div>
           <br>
