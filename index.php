@@ -79,7 +79,7 @@
         while($row = mysqli_fetch_array($result)) {
       ?>
       <div class="carousel-item <?php if($counter <=1){ echo "active";} ?> ">
-        <div class="card" style="width: 10rem;">
+        <div class="card" style="width: 15rem;">
             <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
             <div class="card-body">
               <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
@@ -98,7 +98,7 @@
               <input type="hidden" name="total_harga" value="12">
               <input type="hidden" name="catatan" value="Apa itu gulaaa">
               <input type="hidden" name="tanggal" value="<?php echo date('d-m-Y'); ?>">
-              <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" style="display:flex; margin:auto; padding:0px 10px;">Pesan!</button>
+              <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" class="btn btn-warning"style="margin-top: 10px; display: flex; justify-content: center;">Masukkan Keranjang</button>
               </form>
               <script>
                 let count<?php echo $row['id_menu'];?>= 1;
