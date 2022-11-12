@@ -207,3 +207,9 @@ padding-right: 10%;
   border-top-left-radius: 50%;
   border-bottom-left-radius: 0;
 }
+
+.input {
+  width:30px;  
+  margin:auto;
+  padding:0px 0px 0px 8px;
+}
