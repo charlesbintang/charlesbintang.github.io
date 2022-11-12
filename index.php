@@ -85,10 +85,9 @@
               <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
               <p class="card-text"><?php echo $row["harga"]; ?></p>
 
-              <button id='decrement<?php echo $row['id_menu'];?>' aria-hidden="true" onclick="displayDecrement<?php echo $row['id_menu'];?>()">-</button>
+              <button id='decrement<?php echo $row['id_menu'];?>' class="btn btn-light" aria-hidden="true" onclick="displayDecrement<?php echo $row['id_menu'];?>()">-</button>
               <span id="valueDisplay<?php echo $row['id_menu'];?>" class="box">1</span>
-              <!-- <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="number" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0"> -->
-              <button id='increment<?php echo $row['id_menu'];?>' aria-hidden="true" onclick="displayIncrement<?php echo $row['id_menu'];?>()">+</button>
+              <button id='increment<?php echo $row['id_menu'];?>' class="btn btn-light" aria-hidden="true" onclick="displayIncrement<?php echo $row['id_menu'];?>()">+</button>
 
               <form action="addToCart.php" method="post">
               <input type="hidden" name="id_customer" value="<?php echo $idCustomer['id_customer']?>">
