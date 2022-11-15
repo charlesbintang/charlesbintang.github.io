@@ -1,5 +1,7 @@
 <?php
   session_start();
+  //hapus error reporting ketika debugging. Jangan hapus jika tidak debugging
+  error_reporting(0);
   date_default_timezone_set("Asia/Jakarta");
   if(!isset($_SESSION['session_username'])){
     header("location: login.php");
@@ -34,8 +36,8 @@
       <a class="navbar-brand" href="#">Boba and Tea</a>
       <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width=25%>
     
-        <form class="d-flex" role="search" >
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" action="" method="get">
+          <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search" value="<?php echo $_GET['search'] ?>">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <div class="wrapper-scroll">
@@ -73,7 +75,12 @@
     <div class="carousel-inner">
       <!-- looping php -->
       <?php
-        $sql = "SELECT * FROM menu_costumer";
+        if($_GET['search'] != ''){
+          $search = "AND nama_produk LIKE '%".$_GET['search']."%' ";
+          $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 $search"; 
+        } else {
+        $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1";}
+
         $result = mysqli_query($koneksi ,$sql);
         $counter = 1;
         while($row = mysqli_fetch_array($result)) {
@@ -82,7 +89,7 @@
         <div class="card" style="width: 15rem;">
             <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
             <div class="card-body">
-              <h5 class="card-title"><?php echo $row["namaproduk"]; ?></h5>
+              <h5 class="card-title"><?php echo $row["nama_produk"]; ?></h5>
               <p class="card-text"><?php echo $row["harga"]; ?></p>
 
               <button id='decrement<?php echo $row['id_menu'];?>' class="btn btn-light" aria-hidden="true" onclick="displayDecrement<?php echo $row['id_menu'];?>()">-</button>
