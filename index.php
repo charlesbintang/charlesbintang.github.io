@@ -65,8 +65,6 @@
           <div class="wrapper-item">
             <button type="button" class="btn btn-primary">Tea&nbsp;Series</button>
           </div>
-
-          
         </div>
       </div>
     </div>
@@ -95,7 +93,7 @@
             <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" class="card-img-top" alt="..." width="100%">
             <div class="card-body">
               <h5 class="card-title"><?php echo $row["nama_produk"]; ?></h5>
-              <p class="card-text"><?php echo $row["harga"]; ?></p>
+              <p class="card-text">Rp <?php echo $row["harga"]; ?>.000</p>
 
               <button id='decrement<?php echo $row['id_menu'];?>' class="btn btn-light" aria-hidden="true" onclick="displayDecrement<?php echo $row['id_menu'];?>()">-</button>
               <span id="valueDisplay<?php echo $row['id_menu'];?>" class="box">1</span>
@@ -104,11 +102,14 @@
               <form action="addToCart.php" method="post">
               <input type="hidden" name="id_customer" value="<?php echo $idCustomer['id_customer']?>">
               <input type="hidden" name="id_menu" value="<? echo $row['id_menu']?>">
+              <input type="hidden" name="nama_produk" value="<? echo $row['nama_produk']?>">
+              <input type="hidden" name="src_gambar" value="<? echo $row['src_gambar']?>">
               <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="hidden" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" >
               <input type="hidden" name="harga" value="<?php echo $row['harga']?>">
               <input type="hidden" name="total_pesanan" value="0">
-              <input type="hidden" name="total_harga" value=" ">
+              <input type="hidden" name="total_harga" value="0">
               <input type="hidden" name="catatan" value=" ">
+              <input type="hidden" name="rating" value="<?php echo $row['rating']?>">
               <input type="hidden" name="tanggal" value="<?php echo date('d-m-Y'); ?>">
               <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" class="btn btn-warning"style="margin-top: 10px; display: flex; justify-content: center;">Masukkan Keranjang</button>
               </form>
