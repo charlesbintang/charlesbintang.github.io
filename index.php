@@ -33,8 +33,8 @@
 <header>
   <nav class="navbar navbar-expand-lg fixed-top bg-green">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Boba and Tea</a>
-      <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width=25%>
+      <a class="navbar-brand" href="index.php">Boba and Tea</a>
+      <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width="25%" onclick="document.location.href = 'index.php'">
     
         <form class="d-flex" role="search" action="" method="get">
           <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search" value="<?php echo $_GET['search'] ?>">
@@ -42,10 +42,13 @@
         </form>
         <div class="wrapper-scroll">
           <div class="wrapper-item">
-            <button type="button" class="btn btn-primary">Best&nbsp;Seller</button><br>
+            <button type="button" class="btn btn-primary" onclick="document.location.href = 'index.php?kat=Best%20Seller'">Best&nbsp;Seller</button><br>
           </div>
           <div class="wrapper-item">
-            <button type="button" class="btn btn-primary">New&nbsp;Series</button><br>
+            <button type="button" class="btn btn-primary" onclick="document.location.href = 'index.php?kat=New%20Series'">New&nbsp;Series</button><br>
+          </div>
+          <div class="wrapper-item">
+            <button type="button" class="btn btn-primary" onclick="document.location.href = 'index.php?kat=Chocolate'">Chocolate</button>
           </div>
           <div class="wrapper-item">
             <button type="button" class="btn btn-primary">Coffee</button>
@@ -62,6 +65,8 @@
           <div class="wrapper-item">
             <button type="button" class="btn btn-primary">Tea&nbsp;Series</button>
           </div>
+
+          
         </div>
       </div>
     </div>
@@ -73,10 +78,10 @@
 <h2 align="center" height="40%" class="textt">Menu</h2>
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <!-- looping php -->
       <?php
-        if($_GET['search'] != ''){
-          $search = "AND nama_produk LIKE '%".$_GET['search']."%' ";
+        //looping PHP, Menu
+        if($_GET['search'] != '' || $_GET['kat'] != ''){
+          $search = "AND nama_produk LIKE '%".$_GET['search']."%' AND kategori LIKE '%".$_GET['kat']."%' ";
           $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 $search"; 
         } else {
         $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1";}
@@ -257,20 +262,15 @@
                 valueNumber<?php echo $row['id_menu'];?> = newValue<?php echo $row['id_menu'];?>;
                 valueText<?php echo $row['id_menu'];?> = inputEl<?php echo $row['id_menu'];?>.value;
               }
-
-            
-
               window.addEventListener('load', init, false);
-                      </script>
-              <!-- <span id="valueDisplay" class="box">1</span> -->
-              
+              </script>              
             </div>
           </div>
           <br>
           <p class="fst-italic" align="center">Rasa:<br> <?php echo $row["catatan"]?></p>
       </div>
-      <?php $counter++; }?>
-      <!-- end of looping php -->
+      <?php $counter++; }
+      //end of looping php, Menu?>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -281,15 +281,14 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  
-  
 </main>
 
 <footer>
   <nav class="navbar navbar-expand-lg fixed-bottom bg-green">
     <div class="container-fluid" style="padding-right: 0; padding-left: 0;">
       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-warning">
+        <!-- btn Home -->
+        <button type="button" class="btn btn-warning" onclick="document.location.href = 'index.php'">
           <svg xmlns="http://www.w3.org/2000/svg" width="25%" viewBox="0 0 30 30">
             <path fill="#000000" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
          </svg>
