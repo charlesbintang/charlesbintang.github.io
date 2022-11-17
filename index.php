@@ -106,12 +106,11 @@
               <input type="hidden" name="src_gambar" value="<? echo $row['src_gambar']?>">
               <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="hidden" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" >
               <input type="hidden" name="harga" value="<?php echo $row['harga']?>">
-              <input type="hidden" name="total_pesanan" value="0">
               <input type="hidden" name="total_harga" value="0">
               <input type="hidden" name="catatan" value=" ">
               <input type="hidden" name="rating" value="<?php echo $row['rating']?>">
-              <input type="hidden" name="tanggal" value="<?php echo date('d-m-Y'); ?>">
-              <button type="submit" name="submit" value="<?php echo date('H:i:s'); ?>" class="btn btn-warning"style="margin-top: 10px; display: flex; justify-content: center;">Masukkan Keranjang</button>
+              <!-- <input type="hidden" name="tanggal" value="<?php //echo date('d-m-Y'); ?>"> -->
+              <button type="submit" name="submit" value="<?php //echo date('H:i:s'); ?>" class="btn btn-warning"style="margin-top: 10px; display: flex; justify-content: center;">Masukkan Keranjang</button>
               </form>
               <script>
                 let count<?php echo $row['id_menu'];?>= 1;

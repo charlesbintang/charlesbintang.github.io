@@ -57,6 +57,8 @@
 <main class="container">
     <?php
     // looping php, dibeli
+    $updateTotalHarga = "UPDATE `membeli` SET `total_harga` = `harga` * `jumlah_pesanan` WHERE id_customer = '$idCustomer[id_customer]'; ";
+    mysqli_query($koneksi, $updateTotalHarga);
     $sql = "SELECT * FROM membeli WHERE id_customer = '$idCustomer[id_customer]'; ";
     $result = mysqli_query($koneksi ,$sql);
     $counter = 1;
@@ -69,7 +71,7 @@
             </td>
             <td rowspan="2" class="boba"> <h6><?php echo $row["nama_produk"]; ?></h6> <img src="aset boba/bintang.png" alt="..." class="bintang">&nbsp;<?php echo $row["rating"]; ?></td>
             <td><br>
-                <span class="box">Rp&nbsp;<?php echo $row["harga"]; ?>.000</span>
+                <span class="box">Rp&nbsp;<?php echo $row["total_harga"]; ?>.000</span>
             </td>
         </tr>
         <tr>
