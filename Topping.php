@@ -59,6 +59,17 @@
     // looping php, dibeli
     $updateTotalHarga = "UPDATE `membeli` SET `total_harga` = `harga` * `jumlah_pesanan` WHERE id_customer = '$idCustomer[id_customer]'; ";
     mysqli_query($koneksi, $updateTotalHarga);
+
+    $cekTanpaTopping = "
+    <td style='padding-left:2%; padding-right: 2%;'>
+    <div class='form-check'>
+    <input class='form-check-input' type='radio' name='flexRadioDisabled' id='flexRadioDisabled' disabled>
+    <label class='form-check-label' for='flexRadioDisabled'>
+    Disabled radio
+    </label>
+    </div>
+    </td>";
+
     $sql = "SELECT * FROM membeli WHERE id_customer = '$idCustomer[id_customer]'; ";
     $result = mysqli_query($koneksi ,$sql);
     $counter = 1;
@@ -97,7 +108,7 @@
                         <tr align="center">
                             <td style="padding-left:2%; padding-right: 2%;">
                                 <div class="form-check" style="padding-left: 80%; ">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="<?php $tanpaTopping = true; ?>" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                 </label>
                                 </div>
@@ -106,6 +117,20 @@
                             <td colspan="8">Topping:</td>
                         </tr>
                         <!-- Bonus Topping  -->
+                        <?php 
+                        if($tanpaTopping) {
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                            echo $cekTanpaTopping;
+                        }
+                        ?>
+
+
                         <tr align="center">
                             <td style="padding-left:2%; padding-right: 2%;">
                                 <div class="form-check" style="padding-left: 80%; ">
@@ -164,8 +189,8 @@
                                 </div>
                             </td>
                         </tr>
+
                         <div class="vertical"></div>
-                    
                         <tr align="center">
                             <td>1</td>
                             <td>2</td>
