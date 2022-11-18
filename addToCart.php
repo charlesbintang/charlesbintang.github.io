@@ -7,17 +7,14 @@ if(!$koneksi){
 
 $id_customer = $_POST["id_customer"];
 $id_menu = $_POST["id_menu"];
-$nama_produk = $_POST["nama_produk"];
-$src_gambar = $_POST["src_gambar"];
 $jumlah_pesanan = $_POST["jumlah_pesanan"];
 $harga = $_POST["harga"];
 $total_harga = $_POST["total_harga"];
 $catatan = $_POST["catatan"];
-$rating = $_POST["rating"];
 // $tanggal = $_POST["tanggal"];
 // $waktu = $_POST["submit"];
 
-$query = "INSERT INTO `membeli` (`id_customer`, `id_menu`, `nama_produk`, `src_gambar`, `jumlah_pesanan`, `harga`, `total_harga`, `catatan`, `rating`) VALUES ('$id_customer', '$id_menu', '$nama_produk', '$src_gambar', '$jumlah_pesanan', '$harga', '$total_harga', '$catatan', '$rating');";
+$query = "INSERT INTO `membeli` (`id_customer`, `id_menu`, `jumlah_pesanan`, `harga`, `total_harga`, `catatan`) VALUES ('$id_customer', '$id_menu', '$jumlah_pesanan', '$harga', '$total_harga', '$catatan');";
 
 $saved = mysqli_query($koneksi, $query);
 

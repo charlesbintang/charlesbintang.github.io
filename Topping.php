@@ -11,6 +11,31 @@
     $qry = "SELECT id_customer FROM customer WHERE nama_customer = '$sesUnCus';";
     $sqlIdCus = mysqli_query($koneksi, $qry);
     $idCustomer = mysqli_fetch_array($sqlIdCus);
+
+    if($_GET['del'] != ''){
+        $id_cart = $_GET['del'];
+        function hapus($id_cart){
+            global $koneksi;
+            mysqli_query($koneksi, "DELETE FROM membeli WHERE membeli.id_cart = $id_cart");
+        
+            return mysqli_affected_rows($koneksi);
+        }
+        if (hapus($id_cart) > 0 ){
+            echo
+            "<script>
+            alert('Data berhasil dihapus');
+            document.location.href = 'Topping.php';
+            </script>";
+        } else {
+            echo
+            "<script>
+            alert('Data gagal dihapus');
+            document.location.href = 'Topping.php';
+            </script>";
+        }
+    }
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,18 +84,7 @@
     // looping php, dibeli
     $updateTotalHarga = "UPDATE `membeli` SET `total_harga` = `harga` * `jumlah_pesanan` WHERE id_customer = '$idCustomer[id_customer]'; ";
     mysqli_query($koneksi, $updateTotalHarga);
-
-    $cekTanpaTopping = "
-    <td style='padding-left:2%; padding-right: 2%;'>
-    <div class='form-check'>
-    <input class='form-check-input' type='radio' name='flexRadioDisabled' id='flexRadioDisabled' disabled>
-    <label class='form-check-label' for='flexRadioDisabled'>
-    Disabled radio
-    </label>
-    </div>
-    </td>";
-
-    $sql = "SELECT * FROM membeli WHERE id_customer = '$idCustomer[id_customer]'; ";
+    $sql = "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]'; ";
     $result = mysqli_query($koneksi ,$sql);
     $counter = 1;
     while($row = mysqli_fetch_array($result)) {
@@ -81,8 +95,11 @@
                 <img src="aset boba/1x/<?php echo $row["src_gambar"]; ?>" alt="..." width="50%">        
             </td>
             <td rowspan="2" class="boba"> <h6><?php echo $row["nama_produk"]; ?></h6> <img src="aset boba/bintang.png" alt="..." class="bintang">&nbsp;<?php echo $row["rating"]; ?></td>
-            <td><br>
+            <td style="padding-top:35px;">
                 <span class="box">Rp&nbsp;<?php echo $row["total_harga"]; ?>.000</span>
+            </td>
+            <td><br>
+                <button class="btn btn-danger"><a href="Topping.php?del=<?php echo $row['id_cart']?>" style="text-decoration:none; color:white;">X</a></button>
             </td>
         </tr>
         <tr>
@@ -97,185 +114,182 @@
                     <path fill="#b2b3b4" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                 </svg>
                 </button>
-            </p>
-                <div class="collapse" id="collapseExample<?php echo $row["id_cart"]; ?>">
-                    <!-- Topping -->
-                <!-- Tanpa Topping -->
-                    <table class="table">
-                        <tr>
-                            <td colspan="8">Tanpa Topping:</td>
-                        </tr>
-                        <tr align="center">
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                <input class="form-check-input" type="checkbox" value="<?php $tanpaTopping = true; ?>" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                </label>
-                                </div>
-                            </td>
-                        <tr>
-                            <td colspan="8">Topping:</td>
-                        </tr>
-                        <!-- Bonus Topping  -->
-                        <?php 
-                        if($tanpaTopping) {
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                            echo $cekTanpaTopping;
-                        }
-                        ?>
-
-
-                        <tr align="center">
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                            <td style="padding-left:2%; padding-right: 2%;">
-                                <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <div class="vertical"></div>
-                        <tr align="center">
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
+                </p>
+                <?php
+                    for($x = 1; $x <= $row["jumlah_pesanan"]; $x++ ){
+                        echo '
+                        <div class="collapse" id="collapseExample'.$row["id_cart"].'">
+                            <!-- Topping -->
+                            <!-- Tanpa Topping -->
+                            <table class="table">
+                                <tr>
+                                    <td colspan="8" align="center">Pilihan '.$x.':</td>
                                 </tr>
-                                <!-- Extra Topping -->
-                        <td colspan="8"> Extra Topping: +2K/Topping</td>
-                            </tr>
-                            <tr align="center">
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                    </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
+                                <tr>
+                                    <td colspan="8">Tanpa Topping:</td>
+                                </tr>
+                                <tr align="center">
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         </label>
                                         </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
+                                    </td>
+                                <tr>
+                                    <td colspan="8">Topping:</td>
+                                </tr>
+                                <!-- Bonus Topping  -->
+                                <tr align="center">
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
                                         </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
                                         </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
                                         </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
                                         </div>
-                                </td>
-                                <td style="padding-left:2%; padding-right: 2%;">
-                                    <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                        </label>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
                                         </div>
-                                </td>
-                            </tr>
-                            <div class="vertical"></div>
-                        
-                            <tr align="center">
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>6</td>
-                                <td>7</td>
-                                <td>8</td>
-                            </tr>   
-                    </table>
-                </div>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:2%; padding-right: 2%;">
+                                        <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <div class="vertical"></div>
+                                <tr align="center">
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                        </tr>
+                                        <!-- Extra Topping -->
+                                <td colspan="8"> Extra Topping: +2K/Topping</td>
+                                    </tr>
+                                    <tr align="center">
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                            </label>
+                                            </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td style="padding-left:2%; padding-right: 2%;">
+                                            <div class="form-check" style="padding-left: 80%; ">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                    </tr>
+                                    <div class="vertical"></div>
+                                
+                                    <tr align="center">
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>5</td>
+                                        <td>6</td>
+                                        <td>7</td>
+                                        <td>8</td>
+                                    </tr>   
+                            </table>
+                        </div>
+                        ';
+                    }
+                    
+                ?>
+                
             </td>
         </tr>
     </table>
