@@ -108,7 +108,7 @@
         </tr>
         <tr>
             <td colspan="4"><p>
-                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<?php echo $row["id_cart"]; ?>" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<?php echo $row["id_cart"]; ?>" aria-expanded="false" aria-controls="collapseExample<?php echo $row["id_cart"]; ?>">
                 Topping
                 <svg xmlns="http://www.w3.org/2000/svg" width="7%" viewBox="0 0 24 24" style="margin: auto;">
                     <path fill="#b2b3b4" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
@@ -120,22 +120,27 @@
                         echo '
                         <div class="collapse" id="collapseExample'.$row["id_cart"].'">
                             <!-- Topping -->
-                            <!-- Tanpa Topping -->
                             <table class="table">
                                 <tr>
                                     <td colspan="8" align="center">Pilihan '.$x.':</td>
                                 </tr>
                                 <tr>
+                                    <!-- Tanpa Topping -->
                                     <td colspan="8">Tanpa Topping:</td>
                                 </tr>
                                 <tr align="center">
                                     <td style="padding-left:2%; padding-right: 2%;">
                                         <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" value="" id="flexCheckDefault" type="checkbox" data-bs-toggle="collapse" data-bs-target="#collapseTopping'.$row["id_cart"].$x.'" aria-expanded="true" aria-controls="collapseTopping'.$row["id_cart"].$x.'">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         </label>
                                         </div>
                                     </td>
+                                </tr>
+                            </table>    
+            
+                        <div class="collapse show" id="collapseTopping'.$row["id_cart"].$x.'">      
+                            <table class="table">  
                                 <tr>
                                     <td colspan="8">Topping:</td>
                                 </tr>
@@ -284,8 +289,9 @@
                                         <td>8</td>
                                     </tr>   
                             </table>
+                        
                         </div>
-                        ';
+                        </div>';
                     }
                     
                 ?>
