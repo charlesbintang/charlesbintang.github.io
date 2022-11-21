@@ -12,7 +12,7 @@
     $sqlIdCus = mysqli_query($koneksi, $qry);
     $idCustomer = mysqli_fetch_array($sqlIdCus);
 
-    if($_GET['del'] != ''){
+    if(!empty($_GET['del'])){
         $id_cart = $_GET['del'];
         function hapus($id_cart){
             global $koneksi;
@@ -306,12 +306,18 @@
 
 
 <footer>
+    <?php 
+    //$totalPembayaran = $totalHarga['total_harga'];
+    $totalPembayaran = 0;
+    $result = mysqli_query($koneksi ,$sql);
+    while($row = mysqli_fetch_array($result)){
+        $totalPembayaran += $row["total_harga"];
+        $counter++;
+    }
+    ?>
     <nav class="navbar navbar-expand-lg fixed-bottom bg-green" style="padding-bottom: 0;">
-      <div class="container-fluid" style="
-                                          padding-right: 0;
-                                          padding-left: 0;
-                                          padding-bottom:0;">
-            <button type="button" class="btn btn-warning" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">Bayar Sekarang <br> <h4>Total pembayaran</h4></button>
+      <div class="container-fluid" style="padding-right: 0;padding-left: 0;padding-bottom:0;">
+            <button type="button" class="btn btn-warning" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">Bayar Sekarang <br> <h4><?php echo "Rp ".number_format($totalPembayaran, 3); ?></h4></button>
         </div>  
       </div>
     </nav>
