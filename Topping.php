@@ -1,4 +1,5 @@
 <?php
+    //start of "wajib ada"
     session_start();
     //hapus error reporting ketika debugging. Jangan hapus jika tidak debugging
     //error_reporting(0);
@@ -8,31 +9,72 @@
     }
     $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
     $sesUnCus = $_SESSION['session_username'];
-    $qry = "SELECT id_customer FROM customer WHERE nama_customer = '$sesUnCus';";
-    $sqlIdCus = mysqli_query($koneksi, $qry);
-    $idCustomer = mysqli_fetch_array($sqlIdCus);
+    $sqlIdCus = "SELECT id_customer FROM customer WHERE nama_customer = '$sesUnCus';";
+    $qryIdCus = mysqli_query($koneksi, $sqlIdCus);
+    $idCustomer = mysqli_fetch_array($qryIdCus);
+    //end of "wajib ada"
 
+    //proses delete cart
     if(!empty($_GET['del'])){
-        $id_cart = $_GET['del'];
-        function hapus($id_cart){
+        $hapusIdCart = $_GET['del'];
+        function hapus($hapusIdCart){
             global $koneksi;
-            mysqli_query($koneksi, "DELETE FROM membeli WHERE membeli.id_cart = $id_cart");
+            mysqli_query($koneksi, "DELETE FROM membeli WHERE membeli.id_cart = $hapusIdCart");
         
             return mysqli_affected_rows($koneksi);
         }
-        if (hapus($id_cart) > 0 ){
+        if (hapus($hapusIdCart) > 0 ){
             echo
             "<script>
             alert('Data berhasil dihapus');
-            document.location.href = 'Topping.php';
-            </script>";
+            </script>"; 
         } else {
             echo
             "<script>
             alert('Data gagal dihapus');
-            document.location.href = 'Topping.php';
             </script>";
         }
+    }
+    
+    //proses post untuk pilih Topping
+    if(isset($_POST['pilihTopping'])){
+        $idcart = $_POST['id_cart'];
+        $topping = $_POST['pilihTopping'];
+        $extraTopping = implode(", ", $_POST['pilihExtraTopping']);
+        
+            $sqlIsi= "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]' AND id_cart = '$idcart' ";
+            $result = mysqli_query($koneksi ,$sqlIsi);
+            $rowIsi = mysqli_fetch_array($result);
+            
+            $isiTopping = $rowIsi['topping'];
+            $isiExtraTopping = $rowIsi['extratopping'];
+            
+                if (isset($_POST['pilihExtraTopping'])) {
+                    $xharga = $_POST['pilihExtraTopping'];
+                    $yharga = count($xharga);
+                    $harga = 0;
+                    for ($i=1; $i <= $yharga; $i++) { 
+                        $harga += 2;
+                    }
+                    $ubahHarga = $harga; 
+                }
+                $sqlTopping = "UPDATE `membeli` SET total_harga = total_harga + $ubahHarga, topping = '". $isiTopping . $topping."', extratopping = '". $isiExtraTopping . $extraTopping."' WHERE `membeli`.`id_cart` = '$idcart' AND `membeli`.`id_customer` = '$idCustomer[id_customer]';";
+                $qryTopping = mysqli_query($koneksi, $sqlTopping);
+                if ($qryTopping){
+                    echo '
+                    <script> 
+                    alert("Topping berhasil diperbarui!");
+                    document.location.href = "Topping.php";
+                    </script>
+                    ';
+                    exit;
+                } else {
+                    echo '
+                    <script> alert("Topping gagal diperbarui..")</script>
+                    ';
+                    exit;
+                }
+            
     }
     
 
@@ -55,37 +97,34 @@
     
 </head>
 <body>
-    <!-- Navbar -->
+<!-- Navbar -->
 <header>
-  <nav class="navbar navbar-expand-lg fixed-top bg-green">
+<nav class="navbar fixed-top bg-green">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">Boba and Tea</a>
-      <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width="25%" onclick="document.location.href ='index.php'">
-    </div>
-    <div class="container-fluid">
+    <a class="navbar-brand" href="index.php">Boba and Tea</a>
+    <img src="aset boba/logo bobaho.png" alt="tidak tersedia" width="25%" onclick="document.location.href ='index.php'">
+    
         <button type="button" class="btn btn-secondary" style="width: 80px; border-top-width: 0; padding-top: 0; padding-bottom: 0;" onclick="document.location.href= 'index.php'">
             <svg xmlns="http://www.w3.org/2000/svg" width="80%" viewBox="0 0 24 24">
                 <path fill="#fff" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"></path>
             </svg>
             <path fill="#000000" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-         </svg>
+        </svg>
         </button>
-    </div>
-    <div class="container-fluid">
+    
         <div class="pengenbuatline">&nbsp;</div>
-    </div>
-  </nav>
+    </div>    
+</nav>
 </header>
-     <!-- Close Navbar -->
+    <!-- Close Navbar -->
 
-     <!-- Boba -->
+    <!-- Boba -->
 <main class="container">
     <?php
     // looping php, dibeli
-    $updateTotalHarga = "UPDATE `membeli` SET `total_harga` = `harga` * `jumlah_pesanan` WHERE id_customer = '$idCustomer[id_customer]'; ";
-    mysqli_query($koneksi, $updateTotalHarga);
-    $sql = "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]'; ";
-    $result = mysqli_query($koneksi ,$sql);
+    $sqlMembeli = "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]'; ";
+    $result = mysqli_query($koneksi ,$sqlMembeli);
+    if (mysqli_num_rows($result) > 0) {
     $counter = 1;
     while($row = mysqli_fetch_array($result)) {
     ?>
@@ -108,7 +147,7 @@
         </tr>
         <tr>
             <td colspan="4"><p>
-                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<?php echo $row["id_cart"]; ?>" aria-expanded="false" aria-controls="collapseExample<?php echo $row["id_cart"]; ?>">
+                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<?php echo $row["id_cart"]?>" aria-expanded="false" aria-controls="collapseExample<?php echo $row["id_cart"]?>">
                 Topping
                 <svg xmlns="http://www.w3.org/2000/svg" width="7%" viewBox="0 0 24 24" style="margin: auto;">
                     <path fill="#b2b3b4" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
@@ -116,22 +155,21 @@
                 </button>
                 </p>
                 <?php
-                    for($x = 1; $x <= $row["jumlah_pesanan"]; $x++ ){
-                        echo '
-                        <div class="collapse" id="collapseExample'.$row["id_cart"].'">
+                    for($x = 1; $x <= $row["jumlah_pesanan"]; $x++ ){ ?>
+                        <div class="collapse" id="collapseExample<?php echo $row["id_cart"]?>">
                             <!-- Topping -->
                             <table class="table">
                                 <tr>
-                                    <td colspan="8" align="center">Pilihan '.$x.':</td>
+                                    <td colspan="8" align="center">Pilihan <?php echo $x ?>:</td>
                                 </tr>
                                 <tr>
                                     <!-- Tanpa Topping -->
                                     <td colspan="8">Tanpa Topping:</td>
                                 </tr>
                                 <tr align="center">
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
-                                        <input class="form-check-input" value="" id="flexCheckDefault" type="checkbox" data-bs-toggle="collapse" data-bs-target="#collapseTopping'.$row["id_cart"].$x.'" aria-expanded="true" aria-controls="collapseTopping'.$row["id_cart"].$x.'">
+                                    <td>
+                                        <div class="form-check"> 
+                                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" data-bs-toggle="collapse" data-bs-target="#collapseTopping<?php echo $row["id_cart"];echo $x;?>" aria-expanded="true" aria-controls="collapseTopping<?php echo $row["id_cart"];echo $x;?>">
                                         <label class="form-check-label" for="flexCheckDefault">
                                         </label>
                                         </div>
@@ -139,64 +177,66 @@
                                 </tr>
                             </table>    
             
-                        <div class="collapse show" id="collapseTopping'.$row["id_cart"].$x.'">      
-                            <table class="table">  
+                        <div class="collapse show" id="collapseTopping<?php echo $row["id_cart"];echo $x;?>">      
+                            <table class="table">
+                            <form action="" method="post">
+                            <input type="hidden" name="id_cart" value="<?php echo $row["id_cart"]?>">  
                                 <tr>
                                     <td colspan="8">Topping:</td>
                                 </tr>
                                 <!-- Bonus Topping  -->
                                 <tr align="center">
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Black Boba " id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Boba Jelly " id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td style="padding-left:2%; padding-right: 2%;">
-                                        <div class="form-check" style="padding-left: 80%; ">
+                                    <td>
+                                        <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
@@ -214,65 +254,66 @@
                                     <td>6</td>
                                     <td>7</td>
                                     <td>8</td>
-                                        </tr>
+                                </tr>
                                         <!-- Extra Topping -->
-                                <td colspan="8"> Extra Topping: +2K/Topping</td>
-                                    </tr>
+                                    <td colspan="8"> Extra Topping: +2K/Topping</td>
                                     <tr align="center">
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <td>
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Black Boba" id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                             </label>
                                             </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Boba Jelly" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                                </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                                 </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                             </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                                 </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                                 </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                                 </div>
                                         </td>
-                                        <td style="padding-left:2%; padding-right: 2%;">
-                                            <div class="form-check" style="padding-left: 80%; ">
+                                        <td>
+                                            <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
+
+                                    
                                                 </div>
                                         </td>
                                     </tr>
@@ -287,41 +328,40 @@
                                         <td>6</td>
                                         <td>7</td>
                                         <td>8</td>
-                                    </tr>   
+                                    </tr>
                             </table>
-                        
+                                    <button type="submit" >Tekan Aku jika sudah selesai memilih Topping!</button>
+                                    </form>  
                         </div>
-                        </div>';
-                    }
-                    
-                ?>
-                
+                        </div>
+            <?php   } ?>
             </td>
         </tr>
     </table>
-    <?php $counter++; } 
-    // end of looping, dibeli?>
+    <?php $counter++; } ?> 
     <!-- Close Boba -->
 </main>
 
 
 <footer>
     <?php 
-    //$totalPembayaran = $totalHarga['total_harga'];
     $totalPembayaran = 0;
-    $result = mysqli_query($koneksi ,$sql);
+    $result = mysqli_query($koneksi ,$sqlMembeli);
     while($row = mysqli_fetch_array($result)){
         $totalPembayaran += $row["total_harga"];
         $counter++;
     }
     ?>
     <nav class="navbar navbar-expand-lg fixed-bottom bg-green" style="padding-bottom: 0;">
-      <div class="container-fluid" style="padding-right: 0;padding-left: 0;padding-bottom:0;">
+    <div class="container-fluid" style="padding-right: 0;padding-left: 0;padding-bottom:0;">
             <button type="button" class="btn btn-warning" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">Bayar Sekarang <br> <h4><?php echo "Rp ".number_format($totalPembayaran, 3); ?></h4></button>
         </div>  
-      </div>
+    </div>
     </nav>
-  </footer>
+</footer>  
+    <?php } else { ?>
+    <p align="center">Keranjang Anda kosong! Silahkan kembali ke menu.</p>
+    <?php } ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -78,11 +78,11 @@
     <div class="carousel-inner">
       <?php
         //looping PHP, Menu
-        if($_GET['search'] != '' || $_GET['kat'] != ''){
+        if(!empty($_GET['search']) || !empty($_GET['kat'])){
           $search = "AND nama_produk LIKE '%".$_GET['search']."%' AND kategori LIKE '%".$_GET['kat']."%' ";
           $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 $search"; 
         } else {
-        $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1";}
+        $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 AND jenis_produk = 'minuman'";}
 
         $result = mysqli_query($koneksi ,$sql);
         $counter = 1;

@@ -1,5 +1,11 @@
 <?php
+session_start();
 $koneksi = mysqli_connect("localhost", "root", "", "Bobaho");
+$sesUnCus = $_SESSION['session_username'];
+$sqlIdCus = "SELECT id_customer FROM customer WHERE nama_customer = '$sesUnCus';";
+$qryIdCus = mysqli_query($koneksi, $sqlIdCus);
+$idCustomer = mysqli_fetch_array($qryIdCus);
+
 
 if(!$koneksi){
   die("Gagal terhubung dengan database : " . mysqli_connect_error());
@@ -25,11 +31,28 @@ if ($saved){
   document.location.href = "index.php";
   </script>
 
+  '; 
+} else {
+  echo '
+  <script> alert("Pesanan gagal ditambahkan ke keranjang..")</script>
+  ';
+}
+
+//update total harga pesanan
+$updateTotalHarga = "UPDATE `membeli` SET `total_harga` = `harga` * `jumlah_pesanan` WHERE id_customer = '$idCustomer[id_customer]'; ";
+$updateToHar = mysqli_query($koneksi, $updateTotalHarga);
+
+if ($updateToHar){
+  echo '
+  <script> 
+  alert("Harga telah diperbarui!");
+  </script>
+
   ';
   exit;
 } else {
   echo '
-  <script> alert("Pesanan gagal ditambahkan ke keranjang..")</script>
+  <script> alert("Harga gagal diperbarui..")</script>
   ';
   exit;
 }
