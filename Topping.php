@@ -40,43 +40,68 @@
     if(isset($_POST['pilihTopping'])){
         $idcart = $_POST['id_cart'];
         $topping = $_POST['pilihTopping'];
-        $extraTopping = implode(", ", $_POST['pilihExtraTopping']);
+        $sqlIsi= "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]' AND id_cart = '$idcart' ";
+        $qryIsi = mysqli_query($koneksi ,$sqlIsi);
+        $rowIsi = mysqli_fetch_array($qryIsi);
+        $isiTopping = $rowIsi['topping'];
         
-            $sqlIsi= "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]' AND id_cart = '$idcart' ";
-            $result = mysqli_query($koneksi ,$sqlIsi);
-            $rowIsi = mysqli_fetch_array($result);
+            $sqlTopping = "UPDATE `membeli` SET topping = '".$isiTopping . $topping."' WHERE `membeli`.`id_cart` = '$idcart' AND `membeli`.`id_customer` = '$idCustomer[id_customer]';";
+            $qryTopping = mysqli_query($koneksi, $sqlTopping);
+            if ($qryTopping){
+                echo '
+                <script> 
+                alert("Topping berhasil diperbarui!");
+                document.location.href = "Topping.php";
+                </script>
+                ';
+                exit;
+            } else {
+                echo '
+                <script> alert("Topping gagal diperbarui..")</script>
+                ';
+                exit;
+            }
             
-            $isiTopping = $rowIsi['topping'];
-            $isiExtraTopping = $rowIsi['extratopping'];
-            
-                if (isset($_POST['pilihExtraTopping'])) {
-                    $xharga = $_POST['pilihExtraTopping'];
-                    $yharga = count($xharga);
-                    $harga = 0;
-                    for ($i=1; $i <= $yharga; $i++) { 
-                        $harga += 2;
-                    }
-                    $ubahHarga = $harga; 
-                }
-                $sqlTopping = "UPDATE `membeli` SET total_harga = total_harga + $ubahHarga, topping = '". $isiTopping . $topping."', extratopping = '". $isiExtraTopping . $extraTopping."' WHERE `membeli`.`id_cart` = '$idcart' AND `membeli`.`id_customer` = '$idCustomer[id_customer]';";
-                $qryTopping = mysqli_query($koneksi, $sqlTopping);
-                if ($qryTopping){
-                    echo '
-                    <script> 
-                    alert("Topping berhasil diperbarui!");
-                    document.location.href = "Topping.php";
-                    </script>
-                    ';
-                    exit;
-                } else {
-                    echo '
-                    <script> alert("Topping gagal diperbarui..")</script>
-                    ';
-                    exit;
-                }
-            
+    } else if (isset($_POST['pilihExtraTopping'])) {
+        $idcart = $_POST['id_cart'];
+        $sqlIsi= "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]' AND id_cart = '$idcart' ";
+        $qryIsi = mysqli_query($koneksi ,$sqlIsi);
+        $rowIsi = mysqli_fetch_array($qryIsi);
+        $isiExtraTopping = $rowIsi['extratopping'];
+        $extraTopping = implode(",", $_POST['pilihExtraTopping']);
+        $xharga = $_POST['pilihExtraTopping'];
+        $yharga = count($xharga);
+        $harga = 0;
+        for ($i=1; $i <= $yharga; $i++) { 
+            $harga += 2;
+        }
+        $ubahHarga = $harga; 
+        $sqlExtraTopping = "UPDATE `membeli` SET total_harga = total_harga + $ubahHarga, extratopping = '". $isiExtraTopping . $extraTopping."' WHERE `membeli`.`id_cart` = '$idcart' AND `membeli`.`id_customer` = '$idCustomer[id_customer]';";
+        $qryExtraTopping = mysqli_query($koneksi, $sqlExtraTopping);
+        if ($qryExtraTopping){
+            echo '
+            <script> 
+            alert("Extra Topping berhasil diperbarui!");
+            document.location.href = "Topping.php";
+            </script>
+            ';
+            exit;
+        } else {
+            echo '
+            <script> alert("Extra Topping gagal diperbarui..")</script>
+            ';
+            exit;
+        }
     }
     
+    //konversi nilai string di table topping dan extra topping ke array
+    $sqlKonversi = "SELECT * FROM membeli WHERE id_customer = '$idCustomer[id_customer]'; ";
+    $qryKonversi = mysqli_query($koneksi ,$sqlKonversi);
+    $toppingExtraTopping = mysqli_fetch_array($qryKonversi);
+    $arrTopping = explode(",", $toppingExtraTopping['topping']);
+    // echo $arrTopping[0]; 
+    $arrExtraTopping = explode(",", $toppingExtraTopping['extratopping']);
+    // echo $arrExtraTopping[0];
 
 ?>
 <!DOCTYPE html>
@@ -188,14 +213,14 @@
                                 <tr align="center">
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Black Boba " id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Black Boba," id="flexRadioDefault1" <?php if($arrTopping[$x-1] == "Pilihan ".$x.": Black Boba"){ echo "checked";} ?>>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Boba Jelly " id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Boba Jelly," id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
@@ -260,14 +285,14 @@
                                     <tr align="center">
                                         <td>
                                             <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Black Boba" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Black Boba," id="flexCheckDefault" <?php if($arrExtraTopping[$x-1] == "Pilihan ".$x.": Black Boba"){ echo "checked";} ?>>
                                             <label class="form-check-label" for="flexCheckDefault">
                                             </label>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Boba Jelly" id="flexCheckDefault">
+                                                <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Boba Jelly," id="flexCheckDefault">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                 </label>
                                                 </div>
