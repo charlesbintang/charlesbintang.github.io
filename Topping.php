@@ -54,15 +54,15 @@
                 document.location.href = "Topping.php";
                 </script>
                 ';
-                exit;
             } else {
                 echo '
                 <script> alert("Topping gagal diperbarui..")</script>
                 ';
-                exit;
             }
             
-    } else if (isset($_POST['pilihExtraTopping'])) {
+    } 
+    
+    if (isset($_POST['pilihExtraTopping'])) {
         $idcart = $_POST['id_cart'];
         $sqlIsi= "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]' AND id_cart = '$idcart' ";
         $qryIsi = mysqli_query($koneksi ,$sqlIsi);
@@ -85,12 +85,10 @@
             document.location.href = "Topping.php";
             </script>
             ';
-            exit;
         } else {
             echo '
             <script> alert("Extra Topping gagal diperbarui..")</script>
             ';
-            exit;
         }
     }
     
