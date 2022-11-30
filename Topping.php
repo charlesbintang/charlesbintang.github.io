@@ -2,7 +2,7 @@
     //start of "wajib ada"
     session_start();
     //hapus error reporting ketika debugging. Jangan hapus jika tidak debugging
-    //error_reporting(0);
+    error_reporting(0);
     date_default_timezone_set("Asia/Jakarta");
     if(!isset($_SESSION['session_username'])){
     header("location: login.php");
@@ -377,7 +377,7 @@
     ?>
     <nav class="navbar navbar-expand-lg fixed-bottom bg-green" style="padding-bottom: 0;">
     <div class="container-fluid" style="padding-right: 0;padding-left: 0;padding-bottom:0;">
-            <button type="button" class="btn btn-warning" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">Bayar Sekarang <br> <h4><?php echo "Rp ".number_format($totalPembayaran, 3); ?></h4></button>
+            <button type="button" class="btn btn-warning" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;" onclick="document.location.href = 'barcode.php'">Bayar Sekarang <br> <h4><?php echo "Rp ".number_format($totalPembayaran, 3); ?></h4></button>
         </div>  
     </div>
     </nav>
