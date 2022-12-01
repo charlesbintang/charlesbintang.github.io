@@ -80,7 +80,7 @@
         //looping PHP, Menu
         if(!empty($_GET['search']) || !empty($_GET['kat'])){
           $search = "AND nama_produk LIKE '%".$_GET['search']."%' AND kategori LIKE '%".$_GET['kat']."%' ";
-          $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 $search"; 
+          $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 $search AND jenis_produk = 'minuman'"; 
         } else {
         $sql = "SELECT * FROM menu_costumer WHERE status_produk = 1 AND jenis_produk = 'minuman'";}
 
