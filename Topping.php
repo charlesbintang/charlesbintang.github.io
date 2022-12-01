@@ -26,16 +26,26 @@
         if (hapus($hapusIdCart) > 0 ){
             echo
             "<script>
-            alert('Data berhasil dihapus');
+            alert('Pesanan berhasil dihapus');
             </script>"; 
         } else {
             echo
             "<script>
-            alert('Data gagal dihapus');
+            alert('Pesanan gagal dihapus');
             </script>";
         }
     }
     
+    //tampilkan boba yang aktif
+    $arrToppingAktif = [];
+    $sqlBobaAktif = "SELECT nama_produk FROM `menu_costumer` WHERE jenis_produk = 'topping' AND status_produk = '1';";
+    $qryBobaAktif = mysqli_query($koneksi, $sqlBobaAktif);
+    while($bobaAktif = mysqli_fetch_array($qryBobaAktif)){
+        $arrToppingAktif[] = $bobaAktif["nama_produk"];
+    }
+    $jumlahBoba = count($arrToppingAktif);
+    
+
     //proses post untuk pilih Topping
     if(isset($_POST['pilihTopping'])){
         $idcart = $_POST['id_cart'];
@@ -148,7 +158,6 @@
     $sqlMembeli = "SELECT * FROM membeli INNER JOIN menu_costumer ON membeli.id_menu = menu_costumer.id_menu WHERE id_customer = '$idCustomer[id_customer]'; ";
     $result = mysqli_query($koneksi ,$sqlMembeli);
     if (mysqli_num_rows($result) > 0) {
-    $counter = 1;
     while($row = mysqli_fetch_array($result)) {
     ?>
     <table class="table">
@@ -208,160 +217,53 @@
                                     <td colspan="8">Topping:</td>
                                 </tr>
                                 <!-- Bonus Topping  -->
-                                <tr align="center">
+                                <tr align="left">
+                                    <?php for ($y=0; $y < $jumlahBoba; $y++) { ?>
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Black Boba," id="flexRadioDefault1" <?php if($arrTopping[$x-1] == "Pilihan ".$x.": Black Boba"){ echo "checked";} ?>>
+                                            <input class="form-check-input" type="radio" name="pilihTopping" id="flexRadioDefault1" value="Pilihan <?php echo $x ?>: <?php echo $arrToppingAktif[$y] ?>," <?php if($arrTopping[$y] == "Pilihan ".$x.": ".$arrToppingAktif[$y].""){ echo "checked";} ?>>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             </label>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="pilihTopping" value="Pilihan <?php echo $x ?>: Boba Jelly," id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                            </label>
-                                        </div>
-                                    </td>
+                                    <?php } ?>
                                 </tr>
 
-                                <div class="vertical"></div>
-                                <tr align="center">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
+                                <tr align="left">
+                                    <?php for ($y=0; $y < $jumlahBoba; $y++) { ?>
+                                    <td><?php echo $arrToppingAktif[$y] ?></td>
+                                    <?php } ?>
                                 </tr>
                                         <!-- Extra Topping -->
+                                <tr>
                                     <td colspan="8"> Extra Topping: +2K/Topping</td>
+                                </tr>
                                     <tr align="center">
+                                        <?php for ($y=0; $y < $jumlahBoba; $y++) { ?>
                                         <td>
                                             <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Black Boba," id="flexCheckDefault" <?php if($arrExtraTopping[$x-1] == "Pilihan ".$x.": Black Boba"){ echo "checked";} ?>>
+                                            <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" id="flexCheckDefault" value="Pilihan <?php echo $x ?>: <?php echo $arrToppingAktif[$y] ?>," <?php if($arrExtraTopping[$y] == "Pilihan ".$x.": ".$arrToppingAktif[$y].""){ echo "checked";} ?>>
                                             <label class="form-check-label" for="flexCheckDefault">
                                             </label>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="pilihExtraTopping[]" value="Pilihan <?php echo $x ?>: Boba Jelly," id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-                                                </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                </label>
-
-                                    
-                                                </div>
-                                        </td>
-                                    </tr>
-                                    <div class="vertical"></div>
-                                
-                                    <tr align="center">
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
+                                        <?php } ?>
+                                    </tr>                                
+                                    <tr align="left">
+                                        <?php for ($y=0; $y < $jumlahBoba; $y++) { ?>
+                                        <td><?php echo $arrToppingAktif[$y]; ?></td>
+                                        <?php } ?>
                                     </tr>
                             </table>
                                     <button type="submit" >Tekan Aku jika sudah selesai memilih Topping!</button>
                                     </form>  
                         </div>
                         </div>
-            <?php   } ?>
+            <?php   }  ?>
             </td>
         </tr>
     </table>
-    <?php $counter++; } ?> 
+    <?php } ?> 
     <!-- Close Boba -->
 </main>
 
@@ -372,7 +274,6 @@
     $result = mysqli_query($koneksi ,$sqlMembeli);
     while($row = mysqli_fetch_array($result)){
         $totalPembayaran += $row["total_harga"];
-        $counter++;
     }
     ?>
     <nav class="navbar navbar-expand-lg fixed-bottom bg-green" style="padding-bottom: 0;">
