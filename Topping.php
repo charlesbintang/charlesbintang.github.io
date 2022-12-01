@@ -170,7 +170,7 @@
                 <span class="box">Rp&nbsp;<?php echo $row["total_harga"]; ?>.000</span>
             </td>
             <td><br>
-                <button class="btn btn-danger"><a href="Topping.php?del=<?php echo $row['id_cart']?>" style="text-decoration:none; color:white;">X</a></button>
+                <button class="btn btn-danger" onclick="return(confirm('Apakah Anda yakin?'))"><a href="Topping.php?del=<?php echo $row['id_cart']?>" style="text-decoration:none; color:white;">X</a></button>
             </td>
         </tr>
         <tr>
