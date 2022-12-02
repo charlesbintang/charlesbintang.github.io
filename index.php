@@ -101,7 +101,7 @@
 
               <form action="addToCart.php" method="post">
               <input type="hidden" name="id_customer" value="<?php echo $idCustomer['id_customer']?>">
-              <input type="hidden" name="id_menu" value="<? echo $row['id_menu']?>">
+              <input type="hidden" name="id_menu" value="<?php echo $row['id_menu']?>">
               <input name="jumlah_pesanan" class="inputt" id="input<?php echo $row['id_menu'];?>" type="hidden" value="1" aria-valuemin<?php echo $row['id_menu'];?>="1" autocomplete="off" aria-valuemax<?php echo $row['id_menu'];?>="100" aria-valuenow<?php echo $row['id_menu'];?>="1" tabIndex="0" >
               <input type="hidden" name="harga" value="<?php echo $row['harga']?>">
               <input type="hidden" name="total_harga" value="0">
