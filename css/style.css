@@ -1,0 +1,187 @@
+/* root */
+:root {
+  --warna-putih: white;
+  --warna-hitam: #212529;
+  --warna-utama: #987070;
+  --warna-kedua: #DBB5B5;
+  --warna-ketiga: #C39898;
+}
+
+html, body {
+  background-color: var(--warna-kedua);
+  position: relative;
+  overflow-x: hidden;
+}
+
+section {
+  margin: 3%;
+}
+
+section h1 {
+  text-align: center;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+#contact {
+  margin: 0px 0px 0px 0px;
+  padding: 0% 3% 0% 3%;
+  background-color: var(--warna-ketiga);
+}
+
+#home,
+#projects,
+#skills,
+#achievements {
+  height: 35rem;
+}
+
+@media (max-width: 575.98px) {
+
+  #home,
+  #achievements {
+    height: 38rem;
+  }
+
+  #skills {
+    height: 41rem;
+  }
+
+  #projects {
+    height: 40rem;
+  }
+}
+
+/* nav */
+.navbar {
+  background-color: var(--warna-ketiga);
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: var(--warna-hitam);
+}
+
+.nav-link,
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--warna-hitam);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--warna-hitam);
+  background-color: var(--warna-kedua);
+}
+
+.navbar-nav {
+  font-size: 85%;
+}
+
+/* home */
+#contact-btn {
+  border-color: var(--warna-utama);
+  color: var(--warna-hitam);
+}
+
+#contact-btn:hover {
+  color: var(--warna-putih);
+  background-color: var(--warna-utama);
+}
+
+.card-body {
+  color: var(--warna-hitam);
+}
+
+.card-button {
+  margin-right: 2rem;
+}
+
+/* Projects */
+#pills-tab,
+#pills-tabContent p {
+  display: flex;
+  justify-content: center;
+}
+
+.tab-pane {
+  width: 60%;
+}
+
+.card {
+  height: 23.5rem;
+  --bs-card-border-color: transparent;
+  --bs-card-bg: transparent;
+}
+
+.blug-image img {
+  width: 100%;
+}
+
+#carousel-images img {
+  height: 22rem;
+}
+
+#carousel-images button {
+  display: contents;
+}
+
+.modal-body img {
+  width: 100%;
+  height: 100%;
+}
+
+/* skills */
+#skills-image img {
+  width: 80px;
+  height: 80px;
+}
+
+#skills-image {
+  margin: 2%;
+}
+
+.animation-to-right {
+  transform: translateX(-100%);
+  transition: 1s ease-in-out;
+}
+
+.animation-to-right.start {
+  transform: translateX(0);
+  transition-delay: .1s;
+}
+
+.animation-to-left {
+  transform: translateX(100%);
+  transition: 1s ease-in-out;
+}
+
+.animation-to-left.start {
+  transform: translateX(0);
+  transition-delay: .1s;
+}
+
+#skills-image.row {
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* footer */
+.icon-link img {
+  height: 15px;
+}
+
+.icon-link {
+  text-decoration: none;
+  color: var(--bs-secondary-color);
+}
