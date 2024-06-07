@@ -112,10 +112,6 @@ footer {
   justify-content: center;
 }
 
-.tab-pane {
-  width: 60%;
-}
-
 .card {
   height: 23.5rem;
   --bs-card-border-color: transparent;
