@@ -1,475 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Charles Bintang</title>
-
-  <link href="bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles Bintang | Software Developer</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
+<body class="futuristic-white">
+    <!-- HUD/Grid Background Elements -->
+    <div class="grid-background"></div>
+    <div class="hud-frame"></div>
 
-<body>
-  <nav class="navbar sticky-top navbar-expand-lg " id="navbar-spy">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#home">Charles Bintang</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <div class="navbar-nav nav-pills">
-          <div class="nav-item">
-            <a class="nav-link" href="#home">Home</a>
-          </div>
-          <div class="nav-item">
-            <a class="nav-link" href="#projects">Projects</a>
-          </div>
-          <div class="nav-item">
-            <a class="nav-link" href="#skills">Skills</a>
-          </div>
-          <div class="nav-item">
-            <a class="nav-link" href="#achievements">Achievements</a>
-          </div>
-          <div class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </div>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">CB</span>
+            <span class="logo-line"></span>
         </div>
-      </div>
-    </div>
-  </nav>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#achievements">ACHIEVEMENTS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <div class="nav-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">SYSTEM: ONLINE</span>
+        </div>
+    </nav>
 
-  <div data-bs-spy="scroll" data-bs-target="#navbar-spy" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
-    class="scrollspy-example" tabindex="0">
-    <section id="home">
-      <div class="container">
-        <div class="row">
-          <div class="col-4 text-center">
-            <img src="assets/images/Charles_Bintang.JPG" id="charles-image" class="img-fluid rounded"
-              alt="Charles Bintang">
-          </div>
-          <div class="col p-3">
-            <div class="card-body">
-              <h5 class="card-title">Software Development</h5>
-              <hr>
-              <p class="card-text">I am an enthusiastic learner of digital technologies such as websites, mobile apps,
-                and games. I currently study at State Polytechnic of Batam, and my study program is Multimedia
-                Engineering
-                Technology.</p>
-              <div class="card-button text-end">
-                <a href="#contact" id="contact-btn" class="btn">Contact me</a>
-              </div>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-tag">#SOFTWARE_DEVELOPER</div>
+                <h1>CHARLES <span class="highlight">BINTANG</span></h1>
+                <p>Enthusiastic learner of digital technologies. Multimedia Engineering Technology @ State Polytechnic of Batam.</p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn primary">VIEW_PROJECTS</a>
+                    <a href="#contact" class="btn secondary">CONTACT_ME</a>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="projects">
-      <h1>My Projects</h1>
-      <hr>
-      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pills-blug-tab" data-bs-toggle="pill" data-bs-target="#pills-blug"
-            type="button" role="tab" aria-controls="pills-blug" aria-selected="true">BLUG</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-scrapy-tab" data-bs-toggle="pill" data-bs-target="#pills-scrapy"
-            type="button" role="tab" aria-controls="pills-scrapy" aria-selected="false">Scrapy Book</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-pulo-tab" data-bs-toggle="pill" data-bs-target="#pills-pulo" type="button"
-            role="tab" aria-controls="pills-pulo" aria-selected="false">PULO</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-puloseller-tab" data-bs-toggle="pill" data-bs-target="#pills-puloseller"
-            type="button" role="tab" aria-controls="pills-puloseller" aria-selected="false">PULO Seller</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-android-tab" data-bs-toggle="pill" data-bs-target="#pills-android"
-            type="button" role="tab" aria-controls="pills-android" aria-selected="false">Android</button>
-        </li>
-      </ul>
-      <div class="tab-content d-flex flex-column align-items-center" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-blug" role="tabpanel" aria-labelledby="pills-blug-tab"
-          tabindex="0">
-          <div id="carousel-BLUG" class="carousel carousel-dark slide mb-3">
-            <div id="carousel-images" class="carousel-inner blug-image">
-              <div class="carousel-item active">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/website_blug.png" class="object-fit-scale" alt="website blug">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/website_blug_2.png" class="object-fit-scale" alt="website blug">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/website_blug_3.png" class="object-fit-scale" alt="website blug">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/website_blug_4.png" class="object-fit-scale" alt="website blug">
-                </button>
-              </div>
+            <div class="hero-image-container">
+                <div class="image-frame">
+                    <img src="assets/images/Charles_Bintang.JPG" alt="Charles Bintang" class="profile-img">
+                    <div class="frame-corner tl"></div>
+                    <div class="frame-corner tr"></div>
+                    <div class="frame-corner bl"></div>
+                    <div class="frame-corner br"></div>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-BLUG" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-BLUG" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <p>
-            This organization website was developed using Laravel and Bootstrap
-          </p>
-        </div>
-        <div class="tab-pane fade" id="pills-scrapy" role="tabpanel" aria-labelledby="pills-scrapy-tab" tabindex="0">
-          <div class="card mb-3">
-            <iframe src="https://www.youtube.com/embed/fS-NHc7WlSc?si=5iDwXp0iHXW9Q9Y7" title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
-            <div class="card-body">
-              <p class="card-text">This app was developed with Flutter</p>
-            </div>
-          </div>
-          </p>
-        </div>
-        <div class="tab-pane fade" id="pills-pulo" role="tabpanel" aria-labelledby="pills-pulo-tab" tabindex="0">
-          <div id="carousel-PULO" class="carousel carousel-dark slide mb-3">
-            <div id="carousel-images" class="carousel-inner text-center">
-              <div class="carousel-item active">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo1.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo2.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo3.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-PULO" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-PULO" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <p>
-            This app was developed with Flutter and Firebase
-          </p>
-        </div>
-        <div class="tab-pane fade" id="pills-puloseller" role="tabpanel" aria-labelledby="pills-puloseller-tab"
-          tabindex="0">
-          <div id="carousel-PULO-seller" class="carousel carousel-dark slide mb-3">
-            <div id="carousel-images" class="carousel-inner text-center">
-              <div class="carousel-item active">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo_seller.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo_seller1.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/pulo_seller2.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-PULO-seller"
-              data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-PULO-seller"
-              data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <p>
-            This app was developed with Flutter and Firebase
-          </p>
-        </div>
-        <div class="tab-pane fade" id="pills-android" role="tabpanel" aria-labelledby="pills-android-tab" tabindex="0">
-          <div id="carousel-android" class="carousel carousel-dark slide mb-3">
-            <div id="carousel-images" class="carousel-inner text-center">
-              <div class="carousel-item active">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/android_ml.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/android_ml1.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/android_ml2.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/android_ml3.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-              <div class="carousel-item">
-                <button data-bs-toggle="modal" data-bs-target="#image-modal">
-                  <img src="assets/images/android_ml4.png" class="object-fit-contain" alt="PULO">
-                </button>
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-android" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-android" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <p>
-            This app was developed with Android Studio and TensorFlow Lite
-          </p>
-        </div>
-      </div>
-    </section>
-    <section id="skills">
-      <h1>My Skills</h1>
-      <hr>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col-sm">Flutter</div>
-          <div class="col-sm">Android Development</div>
-          <div class="col-sm">TensorFlow Lite</div>
-          <div class="col-sm">Website Development</div>
-          <div class="col-sm">Laravel</div>
-          <div class="col-sm">Bootstrap</div>
-        </div>
-        <div class="container">
-          <div id="skills-image" class="row gy-5 animation-scroll animation-to-right">
-            <div class="col-6 col-md-4"><img src="assets/icon/flutter.png" class="object-fit-contain" alt="flutter"></div>
-            <div class="col-6 col-md-4"><img src="assets/icon/Android_Robot.png" class="object-fit-contain" alt="android">
-            </div>
-          </div>
-          <div id="skills-image" class="row gy-5 animation-scroll animation-to-left">
-            <div class="col-6 col-md-4"><img src="assets/icon/TF_FullColor_Icon.png" class="object-fit-contain"
-              alt="TensorFlow"></div>
-            <div class="col-6 col-md-4"><img src="assets/icon/world-wide-web_1006771.png" class="object-fit-contain"
-                alt="website"></div>
-          </div>
-          <div id="skills-image" class="row gy-5 animation-scroll animation-to-right">
-            <div class="col-6 col-md-4"><img src="assets/icon/laravel.png" class="object-fit-contain" alt="laravel"></div>
-            <div class="col-6 col-md-4"><img src="assets/icon/bootstrap-logo.svg" class="object-fit-contain"
-                alt="bootstrap"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="achievements">
-      <h1>My Achievements</h1>
-      <hr>
-      <div id="carousel-sertifikat" class="carousel carousel-dark slide mb-3">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="3"
-            aria-label="Slide 4"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="4"
-            aria-label="Slide 5"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="5"
-            aria-label="Slide 6"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="6"
-            aria-label="Slide 7"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="7"
-            aria-label="Slide 8"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="8"
-            aria-label="Slide 9"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="9"
-            aria-label="Slide 10"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="10"
-            aria-label="Slide 11"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="11"
-            aria-label="Slide 12"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="12"
-            aria-label="Slide 13"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="13"
-            aria-label="Slide 14"></button>
-          <button type="button" data-bs-target="#carousel-sertifikat" data-bs-slide-to="14"
-            aria-label="Slide 15"></button>
-        </div>
-        <div id="carousel-images" class="carousel-inner blug-image">
-          <div class="carousel-item active">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat1.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat2.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat3.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat4.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat5.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat6.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat7.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat8.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat9.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat10.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat11.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat12.jpg" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat13.png" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat14.png" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-          <div class="carousel-item">
-            <button data-bs-toggle="modal" data-bs-target="#image-modal">
-              <img src="assets/images/sertifikat15.png" class="object-fit-scale" alt="website blug">
-            </button>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sertifikat" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel-sertifikat" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </section>
-    <section id="contact">
-      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5">
-        <div class="col mb-3">
-          <h5>Charles Bintang</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a class="icon-link" href="mailto:charlesbintang203@gmail.com">
-                <img src="assets/icon/gmail.ico" alt="gmail">
-                charlesbintang203@gmail.com
-              </a>
-            </li>
-            <li class="nav-item mb-2">
-              <a class="icon-link" href="https://www.linkedin.com/in/charles-bintang-203b247a3/">
-                <img src="assets/icon/linkedin.ico" alt="linkedin">
-                Charles Bintang
-              </a>
-            </li>
-            <li class="nav-item mb-2">
-              <a class="icon-link" href="https://wa.me/+6282384911204">
-                <img src="assets/icon/wa.ico" alt="whatsapp">
-                +6282384911204
-              </a>
-            </li>
-          </ul>
-          <p class="text-body-secondary">© 2024</p>
-        </div>
-        <div class="col mb-3">
-          <h5>Section</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#home" class="nav-link p-0 text-body-secondary">Home</a></li>
-            <li class="nav-item mb-2"><a href="#projects" class="nav-link p-0 text-body-secondary">Projects</a></li>
-            <li class="nav-item mb-2"><a href="#skills" class="nav-link p-0 text-body-secondary">Skills</a></li>
-            <li class="nav-item mb-2"><a href="#achievements" class="nav-link p-0 text-body-secondary">Achievements</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
-    </section>
-  </div>
+        </section>
 
-  <!-- Modal -->
-  <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="image-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="image-modal-label">Image</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <img src="" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
+        <section id="about" class="about">
+            <div class="section-header">
+                <h2 data-title="ABOUT_ME">ABOUT_ME</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I am a passionate software developer focused on creating immersive digital experiences. Currently pursuing Multimedia Engineering Technology, I specialize in website, mobile app, and game development.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">STUDENT</div>
+                        <div class="stat-label">POLIBATAM</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
+        <section id="skills" class="skills">
+            <div class="section-header">
+                <h2 data-title="TECH_STACK">TECH_STACK</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item" data-name="Flutter">
+                    <img src="assets/icon/flutter.png" alt="Flutter">
+                    <span>FLUTTER</span>
+                </div>
+                <div class="skill-item" data-name="Android">
+                    <img src="assets/icon/Android_Robot.png" alt="Android">
+                    <span>ANDROID</span>
+                </div>
+                <div class="skill-item" data-name="TensorFlow">
+                    <img src="assets/icon/TF_FullColor_Icon.png" alt="TensorFlow">
+                    <span>TENSORFLOW</span>
+                </div>
+                <div class="skill-item" data-name="Web">
+                    <img src="assets/icon/world-wide-web_1006771.png" alt="Web">
+                    <span>WEB_DEV</span>
+                </div>
+                <div class="skill-item" data-name="Laravel">
+                    <img src="assets/icon/laravel.png" alt="Laravel">
+                    <span>LARAVEL</span>
+                </div>
+                <div class="skill-item" data-name="Bootstrap">
+                    <img src="assets/icon/bootstrap-logo.svg" alt="Bootstrap">
+                    <span>BOOTSTRAP</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="section-header">
+                <h2 data-title="PORTFOLIO">PORTFOLIO</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="projects-container">
+                <!-- Projects will be populated or hardcoded here -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/website_blug.png" alt="BLUG Website">
+                    </div>
+                    <div class="project-info">
+                        <h3>BLUG_ORGANIZATION</h3>
+                        <p>Developed using Laravel and Bootstrap.</p>
+                        <div class="project-tags">
+                            <span>#LARAVEL</span>
+                            <span>#BOOTSTRAP</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/pulo.png" alt="PULO App">
+                    </div>
+                    <div class="project-info">
+                        <h3>PULO_MOBILE_APP</h3>
+                        <p>Real-time app developed with Flutter and Firebase.</p>
+                        <div class="project-tags">
+                            <span>#FLUTTER</span>
+                            <span>#FIREBASE</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/pulo_seller.png" alt="PULO Seller App">
+                    </div>
+                    <div class="project-info">
+                        <h3>PULO_SELLER_APP</h3>
+                        <p>Seller management app developed with Flutter.</p>
+                        <div class="project-tags">
+                            <span>#FLUTTER</span>
+                            <span>#FIREBASE</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/android_ml.png" alt="Android ML">
+                    </div>
+                    <div class="project-info">
+                        <h3>ANDROID_ML_DETECTION</h3>
+                        <p>Object detection with Android Studio and TensorFlow Lite.</p>
+                        <div class="project-tags">
+                            <span>#ANDROID</span>
+                            <span>#TFLITE</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <!-- YouTube embed or placeholder -->
+                        <div class="video-placeholder" style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; font-family: Orbitron; font-size: 0.8rem; color: #999;">VIDEO_CONTENT</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>SCRAPY_BOOK</h3>
+                        <p>Feature-rich app developed with Flutter.</p>
+                        <div class="project-tags">
+                            <span>#FLUTTER</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="achievements" class="achievements">
+            <div class="section-header">
+                <h2 data-title="QUALIFICATIONS">QUALIFICATIONS</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="achievements-grid">
+                <img src="assets/images/sertifikat1.jpg" alt="Sertifikat 1">
+                <img src="assets/images/sertifikat2.jpg" alt="Sertifikat 2">
+                <img src="assets/images/sertifikat3.jpg" alt="Sertifikat 3">
+                <img src="assets/images/sertifikat4.jpg" alt="Sertifikat 4">
+                <img src="assets/images/sertifikat5.jpg" alt="Sertifikat 5">
+                <img src="assets/images/sertifikat6.jpg" alt="Sertifikat 6">
+                <img src="assets/images/sertifikat7.jpg" alt="Sertifikat 7">
+                <img src="assets/images/sertifikat8.jpg" alt="Sertifikat 8">
+                <img src="assets/images/sertifikat9.jpg" alt="Sertifikat 9">
+                <img src="assets/images/sertifikat10.jpg" alt="Sertifikat 10">
+                <img src="assets/images/sertifikat11.jpg" alt="Sertifikat 11">
+                <img src="assets/images/sertifikat12.jpg" alt="Sertifikat 12">
+                <img src="assets/images/sertifikat13.png" alt="Sertifikat 13">
+                <img src="assets/images/sertifikat14.png" alt="Sertifikat 14">
+                <img src="assets/images/sertifikat15.png" alt="Sertifikat 15">
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="section-header">
+                <h2 data-title="COMMUNICATION">COMMUNICATION</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-methods">
+                    <a href="mailto:charlesbintang203@gmail.com" class="contact-link">
+                        <img src="assets/icon/gmail.ico" alt="Gmail">
+                        <span>charlesbintang203@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/charles-bintang-203b247a3/" class="contact-link">
+                        <img src="assets/icon/linkedin.ico" alt="LinkedIn">
+                        <span>CHARLES_BINTANG</span>
+                    </a>
+                    <a href="https://wa.me/+6282384911204" class="contact-link">
+                        <img src="assets/icon/wa.ico" alt="WhatsApp">
+                        <span>+6282384911204</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 CHARLES_BINTANG. PROTOCOL_INITIATED.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
